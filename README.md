@@ -12,6 +12,6 @@ Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
 
 ## Professores responsáveis
 
-* João Caramto Santos de Oliveira
+* João Caram Santos de Oliveira
 * Nome completo do professor 2
 
