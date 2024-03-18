@@ -1,4 +1,4 @@
-# Nome do projeto
+# LPM Comidinhas Veganas
 Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
 
 ## Alunos integrantes da equipe
