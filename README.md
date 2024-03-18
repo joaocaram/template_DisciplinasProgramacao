@@ -1,5 +1,5 @@
 # LPM Comidinhas Veganas
-Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
+O objetivo é fazer o controle de pessoas de acordo com a quantidade de mesas disponíveis em um restaurante.
 
 ## Alunos integrantes da equipe
 
