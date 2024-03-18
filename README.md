@@ -7,7 +7,7 @@ Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
 * Lucas..
 * Matheus Pretti de Oliva
 * Nelson de Campos Nolasco
-* Nome completo do aluno 5
+* Pedro Henrique Lobato Firbida
 * Nome completo do aluno 6
 
 ## Professores responsáveis
