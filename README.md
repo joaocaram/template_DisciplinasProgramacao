@@ -8,7 +8,7 @@ Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
 * Arthur George Souza Cardenas
 * André Xavier Lazarini
 * Gabriel Lage Silva
-* 
+* Pedro Henrique de Almeida Araujo
 
 ## Professores responsáveis
 
