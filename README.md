@@ -8,7 +8,7 @@ numa fila de espera. As requisições precisam registrar data e horas de entrada
 ## Alunos integrantes da equipe
 
 * Eduardo Henrique Moreira dos Santos.
-* Hélio Hernesto Gouvea Dutra Teixeira.
+* Helio Ernesto Gouvea Dutra Teixeira.
 * Ian dos Reis Novais.
 * João Antônio Nascimento Pires.
 * Roberta Sophia Carvalho Silva.
