@@ -22,14 +22,7 @@ public class TestCliente {
     }
 
     @Test
-    public void testSetNome() {
-        c.setNome("João Caram");
-        assertEquals("João Caram", c.getNome());
-    }
-
-    @Test
-    public void testSetTelContato() {
-        c.setTelContato("222222222");
-        assertEquals("222222222", c.getTelContato());
+    public void coletarDadosCliente() {
+        assertEquals("Nome: João, Telefone: 123456789", c.dadosCliente());
     }
 }
