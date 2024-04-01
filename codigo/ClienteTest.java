@@ -5,8 +5,8 @@ public class ClienteTest {
 
     @Test
     public void testConstrutor() {
-        Cliente cliente = new Cliente("Gabriel", 3);
+        Cliente cliente = new Cliente("Gabriel");
         assertEquals(cliente.getNome(), "Gabriel");
-        assertEquals(3, cliente.getNumeroAcompanhantes());
+
     }
 }
