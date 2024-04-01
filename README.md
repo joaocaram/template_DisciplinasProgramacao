@@ -1,4 +1,4 @@
-# LPM Comidinhas Veganas Nhami Nhami
+# LPM Comidinhas Veganas
 Um restaurante atende seus clientes alocando-os em mesas por meio de 'requisições por mesas'. No momento, o
 restaurante possui 10 mesas: 4 com capacidade para 4 pessoas, 4 com capacidade para 6 pessoas e 2 com capacidade para
 8 pessoas. O cliente, ao chegar, deve declarar quantas pessoas comerão no restaurante, gerando assim uma requisição por
