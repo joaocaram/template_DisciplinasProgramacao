@@ -1,10 +1,11 @@
 # Diagramas de classe
 Coloque aqui todas as versões do seu diagrama de classes. Cada versão deve começar com um número de dois dígitos, na ordem crescente.
 
-01 - 
-![DiagramaClasses V01 - Trabalho LPM](https://github.com/DisciplinasProgramacao/lpm-projeto2024-1-joaoo/assets/143658544/fd3e041a-6138-4223-bc88-16f1499f1baf)
+01 - ![DiagramaClasses V01 - Trabalho LPM](https://github.com/DisciplinasProgramacao/lpm-projeto2024-1-joaoo/assets/143658544/fd3e041a-6138-4223-bc88-16f1499f1baf)
 No diagrama é representado o sistema de atendimento de um restaurante. O qual possui diversas mesas com capacidades diversas, mas todas objetos da mesma classe. Estas, dentro do sistema, são armazenados em um vetor de objetos que é compartilhado com a classe Restaurante. 
 Simultaneamente, para realizar um atendimento, o Restaurante necessita de uma Requisição contendo as informações de quantas pessoas vão se sentar à mesa e qual é o Cliente que fez a requisição assim como seu contato. Individuando aqui duas outras classes, indicadas pela inicial maiúscula. 
 A classe Cliente é o cadrastro do cliente do restaurante e contém seu nome e telefone para contato; cada cliente pode efetuar nenhuma ou várias Requisições. Estas que armazenam os dados de quantas pessoas são esperadas, o horário e data que foi efetuada a requisição, posteriormente, o horário de saída e as informações do Cliente responsável.
 O Restaurante recebe tanto o vetor com as Mesas quanto um vetor FilaAtendimento contendo as Requisições na ordem que foram feitas. Com estas informações o Restaurante analisa as Requisições e compara a quantidade de pessoas esperada com a capacidade das mesas disponíveis, assim podendo alocar as Requisições nas suas respectivas Mesas na ordem que foram efetuadas e seguindo a capacidade máxima das Mesas disponíveis.
 Ao final do atendimento, o Restaurante fecha a conta encerrando assim o atendimento, com isso a própria classe Restaurante armazena a Requisição que foi concluída em um vetor de historicoRequisicao e chama uma função que desocupa a Mesa, podendo assim esta receber outra Requisição.
+
+02 -![DiagramaClasses V01 - Trabalho LPM](https://github.com/DisciplinasProgramacao/lpm-projeto2024-1-javaquinho/assets/136115980/58bc95ce-deca-48d1-835b-d7676909a580)
