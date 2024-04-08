@@ -6,7 +6,6 @@ public class Requisicao {
     private int quantidadePessoas;
     private LocalDate data;
     private LocalTime horaEntrada;
-    private LocalTime horaSaida;
 
     public Requisicao(Cliente cliente) {
         this.cliente = cliente;

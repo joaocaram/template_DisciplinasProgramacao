@@ -6,7 +6,7 @@ public class Restaurante {
     private ArrayList<Requisicao> historicoAtendimento;
 
     public void alocarMesa() {
-        Requisicao requisicao = new Requisicao();
+        Requisicao requisicao;
         boolean alocado = false;
         int indice = 0;
 
