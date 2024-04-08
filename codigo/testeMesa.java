@@ -21,7 +21,8 @@ public class testeMesa {
     @Test
     public void testOcuparEDesocupar() {
         Mesa mesa = new Mesa();
-        Requisicao requisicao = new Requisicao("Pedido 1");
+        Cliente cliente = new Cliente("Roberta", "319987458536");
+        Requisicao requisicao = new Requisicao(cliente);
 
         assertFalse(mesa.estaOcupada());
         assertTrue(mesa.ocupar(requisicao));
