@@ -2,10 +2,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Requisicao {
+    private Cliente cliente;
     private int numDaFila;
     private LocalDate data;
     private LocalTime horaEntrada;
     private LocalTime horaSaida;
+    private Mesa mesa;
     private int numAcompanhantes;
 
     public Requisicao(String nome) {
@@ -17,6 +19,10 @@ public class Requisicao {
 
     }
 
+    public String getNomeCliente() {
+        return cliente.getNome();
+    }
+    
     public int getNumDaFila() {
         return numDaFila;
     }
@@ -31,6 +37,10 @@ public class Requisicao {
 
     public LocalTime getSaida() {
       return horaSaida;
+    }
+
+    public int getNumMesa() {
+        return mesa.getMesa();
     }
 
     public int getNumAcompanhantes() {
