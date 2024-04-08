@@ -7,7 +7,7 @@ public class Requisicao {
     private int idCliente;
     private int numPessoas;
     private LocalDateTime dataHoraEntrada;
-    private static LocalDateTime dataHoraSaida;
+    private LocalDateTime dataHoraSaida;
 
     public Requisicao(int idCliente, int numPessoas) {
         this.idRequisicao = contadorId++;
@@ -32,16 +32,12 @@ public class Requisicao {
         return dataHoraSaida;
     }
 
-    public static void setdataHoraSaida() {
-        dataHoraSaida = LocalDateTime.now();
-    }
-
     public int getIdRequisicao() {
         return idRequisicao;
     }
 
-    public static void encerrarRequisicao() {
-        setdataHoraSaida();
+    public void encerrarRequisicao() {
+        this.dataHoraSaida = LocalDateTime.now();
     }
 
 }

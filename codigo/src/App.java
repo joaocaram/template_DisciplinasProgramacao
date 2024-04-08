@@ -17,7 +17,7 @@ public class App {
 
       cliente = new Cliente("Maria");
 
-      restaurante.alocarMesa(new Requisicao(cliente.getIdCliente(), 2));
+      restaurante.alocarMesa(new Requisicao(cliente.getIdCliente(), 3));
 
       System.out.println("Mesas disponíveis: " + restaurante.verificarMesasDisponiveis());
 
