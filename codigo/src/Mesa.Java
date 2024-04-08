@@ -3,7 +3,6 @@ public class Mesa {
     private int idMesa;
     private int capacidade;
     private boolean disponivel;
-    private int ocupacaoAtual;
 
     public Mesa(int idMesa, int capacidade) {
         this.idMesa = idMesa;
@@ -20,7 +19,7 @@ public class Mesa {
     }
 
     public boolean isDisponivel() {
-        return disponivel && ocupacaoAtual == 0;
+        return disponivel;
     }
 
     public void setDisponivel(boolean disponivel) {
@@ -34,7 +33,6 @@ public class Mesa {
     public boolean alocarCliente(Cliente cliente) {
         if (verificarDisponibilidade(cliente.getNumPessoas())) {
             setDisponivel(false);
-            setOcupacaoAtual(cliente.getNumPessoas());
             return true;
         }
         return false;
