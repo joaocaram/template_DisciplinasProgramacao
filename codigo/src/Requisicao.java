@@ -1,50 +1,19 @@
-package Requisicao;
-
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Requisicao {
+    private static int contadorId = 1; // Para gerar IDs únicos automaticamente
+
     private int idRequisicao;
     private int idCliente;
     private int numPessoas;
     private LocalDateTime dataHoraEntrada;
-    private LocalDateTime dataHoraSaida;
-    private boolean atendida;
+    private static LocalDateTime dataHoraSaida;
 
-    public Requisicao(int idRequisicao, int idCliente, int numPessoas, LocalDateTime dataHoraEntrada) {
-        this.idRequisicao = idRequisicao;
+    public Requisicao(int idCliente, int numPessoas) {
+        this.idRequisicao = contadorId++;
         this.idCliente = idCliente;
         this.numPessoas = numPessoas;
-        this.dataHoraEntrada = dataHoraEntrada;
-        this.dataHoraSaida = null;
-        this.atendida = false;
-    }
-
-    public Duration calcularDuracao() {
-        if (dataHoraSaida != null) {
-            return Duration.between(dataHoraEntrada, dataHoraSaida);
-        } else {
-            return Duration.ZERO;
-        }
-    }
-
-    public boolean alocarCliente(Cliente cliente, int numPessoasDesejadas) {
-        if (!atendida && numPessoasDesejadas <= numPessoas) {
-            atendida = true;
-            return true;
-        }
-        return false;
-    }
-
-    public void encerrarRequisicao() {
-        if (!atendida) {
-            atendida = true;
-            dataHoraSaida = LocalDateTime.now();
-        }
-    }
-
-    public int getIdRequisicao() {
-        return idRequisicao;
+        this.dataHoraEntrada = LocalDateTime.now();
     }
 
     public int getIdCliente() {
@@ -63,13 +32,16 @@ public class Requisicao {
         return dataHoraSaida;
     }
 
-    public boolean isAtendida() {
-        return atendida;
+    public static void setdataHoraSaida() {
+        dataHoraSaida = LocalDateTime.now();
     }
 
-    public void setAtendida(boolean atendida) {
-        this.atendida = atendida;
+    public int getIdRequisicao() {
+        return idRequisicao;
     }
+
+    public static void encerrarRequisicao() {
+        setdataHoraSaida();
+    }
+
 }
-
-

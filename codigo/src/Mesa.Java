@@ -1,57 +1,33 @@
 public class Mesa {
+  private int capacidade;
+  private int idMesa;
+  private int idRequisicao;
 
-    private int idMesa;
-    private int capacidade;
-    private boolean disponivel;
-    private int ocupacaoAtual;
+  public Mesa(int idMesa, int capacidade) {
+      this.idMesa = idMesa;
+      this.capacidade = capacidade;
+      this.idRequisicao = -1; // ID de requisição -1 indica que a mesa está disponível
+  }
 
-    public Mesa(int idMesa, int capacidade) {
-        this.idMesa = idMesa;
-        this.capacidade = capacidade;
-        this.disponivel = true;
-        this.ocupacaoAtual = 0;
-    }
+  public boolean verificarDisponibilidade() {
+      return idRequisicao == -1;
+  }
 
-    public int getIdMesa() {
-        return idMesa;
-    }
+  public int getCapacidade() {
+      return capacidade;
+  }
 
-    public int getCapacidade() {
-        return capacidade;
-    }
+  public int getIdMesa() {
+      return idMesa;
+  }
+  
+  public void setIdRequisicao(int idRequisicao) {
+      this.idRequisicao = idRequisicao;
+  }
 
-    public boolean isDisponivel() {
-        return disponivel && ocupacaoAtual == 0;
-    }
+  public int getIdRequisicao() {
+      return idRequisicao;
+  }
 
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
-    }
-
-    public int getOcupacaoAtual() {
-        return ocupacaoAtual;
-    }
-
-    public void setOcupacaoAtual(int ocupacaoAtual) {
-        this.ocupacaoAtual = ocupacaoAtual;
-    }
-
-    public boolean verificarDisponibilidade(int numPessoas) {
-        return isDisponivel() && numPessoas <= getCapacidade();
-    }
-
-    public boolean alocarCliente(Cliente cliente) {
-        if (verificarDisponibilidade(cliente.getNumPessoas())) {
-            setDisponivel(false);
-            setOcupacaoAtual(cliente.getNumPessoas());
-            return true;
-        }
-        return false;
-    }
-
-    public void desocuparMesa() {
-        setDisponivel(true);
-        setOcupacaoAtual(0);
-    }
 }
 
