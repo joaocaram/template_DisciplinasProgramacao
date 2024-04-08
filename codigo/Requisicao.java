@@ -3,18 +3,18 @@ import java.time.LocalTime;
 
 public class Requisicao {
     private Cliente cliente;
-    private int numDaFila;
     private LocalDate data;
     private LocalTime horaEntrada;
     private LocalTime horaSaida;
     private Mesa mesa;
     private int numAcompanhantes;
 
-    public Requisicao(String nome) {
-        this.numDaFila = numDaFila;
+    public Requisicao(Cliente cliente, LocalDate data, LocalTime horaEntrada, LocalTime horaSaida, Mesa mesa, int numAcompanhantes) {
+        this.cliente = cliente;
         this.data = data;
         this.horaEntrada = horaEntrada;
         this.horaSaida = horaSaida;
+        this.mesa = mesa;
         this.numAcompanhantes = numAcompanhantes;
 
     }
@@ -22,13 +22,13 @@ public class Requisicao {
     public String getNomeCliente() {
         return cliente.getNome();
     }
-    
-    public int getNumDaFila() {
-        return numDaFila;
-    }
 
     public LocalDate getData() {
       return data;
+    }
+
+    public void setData(LocalDate data){
+        this.data = data;
     }
 
     public LocalTime getEntrada() {
@@ -39,6 +39,10 @@ public class Requisicao {
       return horaSaida;
     }
 
+    public void setSaida(LocalTime horaSaida){
+        this.horaSaida = horaSaida;
+    }
+
     public int getNumMesa() {
         return mesa.getMesa();
     }
@@ -47,4 +51,11 @@ public class Requisicao {
       return numAcompanhantes;
     }
 
+    public void setNumAcompanhantes(int numAcompanhantes){
+        this.numAcompanhantes = numAcompanhantes;
+    }
+
+    public void salvar(){
+        
+    }
 }
