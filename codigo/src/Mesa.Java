@@ -9,7 +9,6 @@ public class Mesa {
         this.idMesa = idMesa;
         this.capacidade = capacidade;
         this.disponivel = true;
-        this.ocupacaoAtual = 0;
     }
 
     public int getIdMesa() {
@@ -28,14 +27,6 @@ public class Mesa {
         this.disponivel = disponivel;
     }
 
-    public int getOcupacaoAtual() {
-        return ocupacaoAtual;
-    }
-
-    public void setOcupacaoAtual(int ocupacaoAtual) {
-        this.ocupacaoAtual = ocupacaoAtual;
-    }
-
     public boolean verificarDisponibilidade(int numPessoas) {
         return isDisponivel() && numPessoas <= getCapacidade();
     }
@@ -51,7 +42,6 @@ public class Mesa {
 
     public void desocuparMesa() {
         setDisponivel(true);
-        setOcupacaoAtual(0);
     }
 }
 

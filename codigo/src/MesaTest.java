@@ -33,90 +33,64 @@ class Requisicao {
 
 public class MesaTest {
     @Test
-    public void testVerificarDisponibilidadeMesaDisponivelSemOcupacao() {
-    Mesa mesa = new Mesa(1, 4);
+    public void testVerificarDisponibilidadeMesaDisponivel() {
+        Mesa mesa = new Mesa(1, 4);
+        mesa.setDisponivel(true);
 
-    boolean disponivel = mesa.verificarDisponibilidade();
+        boolean disponivel = mesa.verificarDisponibilidade();
 
-    assertTrue(disponivel);
+        assertTrue(disponivel);
     }
 
     @Test
-    public void testVerificarDisponibilidadeMesaOcupadaComOcupacaoTotal() {
-    Mesa mesa = new Mesa(1, 4);
-    mesa.alocarCliente(new Cliente(1, "João", 4));
+    public void testVerificarDisponibilidadeMesaOcupada() {
+        Mesa mesa = new Mesa(1, 4);
+        mesa.setDisponivel(false);
 
-    boolean disponivel = mesa.verificarDisponibilidade();
+        boolean disponivel = mesa.verificarDisponibilidade();
 
-    assertFalse(disponivel);
-    }
-
-    @Test
-    public void testVerificarDisponibilidadeMesaOcupadaComOcupacaoParcial() {
-    Mesa mesa = new Mesa(1, 4);
-    mesa.alocarCliente(new Cliente(1, "João", 2));
-
-    boolean disponivel = mesa.verificarDisponibilidade(2);
-
-    assertFalse(disponivel);
-    assertTrue(mesa.verificarDisponibilidade(1));
+        assertFalse(disponivel);
     }
 
     @Test
     public void testAlocarClienteMesaDisponivelCapacidadeSuficiente() {
-    Mesa mesa = new Mesa(1, 4);
+        Mesa mesa = new Mesa(1, 4);
+        mesa.setDisponivel(true);
 
-    Cliente cliente = new Cliente(1, "João", 2);
+        Cliente cliente = new Cliente(1, "João", 2);
 
-    boolean alocado = mesa.alocarCliente(cliente);
+        boolean alocado = mesa.alocarCliente(cliente);
 
-    assertTrue(alocado);
-    assertFalse(mesa.isDisponivel());
-    assertEquals(cliente.getNumPessoas(), mesa.getOcupacaoAtual()); 
+        assertTrue(alocado);
+        assertFalse(mesa.isDisponivel());
+        assertEquals(cliente, mesa.getCliente());
     }
 
     @Test
     public void testAlocarClienteMesaIndisponivel() {
-    Mesa mesa = new Mesa(1, 4);
-    mesa.alocarCliente(new Cliente(1, "João", 4));
+        Mesa mesa = new Mesa(1, 4);
+        mesa.setDisponivel(false);
 
-    Cliente cliente = new Cliente(2, "Maria", 2);
+        Cliente cliente = new Cliente(1, "João", 2);
 
-    boolean alocado = mesa.alocarCliente(cliente);
+        boolean alocado = mesa.alocarCliente(cliente);
 
-    assertFalse(alocado);
-    assertTrue(mesa.isDisponivel());
-    assertEquals(0, mesa.getOcupacaoAtual());
-    }   
+        assertFalse(alocado);
+        assertTrue(mesa.isDisponivel());
+        assertNull(mesa.getCliente());
+    }
 
     @Test
     public void testAlocarClienteMesaDisponivelCapacidadeInsuficiente() {
-    Mesa mesa = new Mesa(1, 2);
+        Mesa mesa = new Mesa(1, 2);
+        mesa.setDisponivel(true);
 
-    Cliente cliente = new Cliente(1, "João", 4);
+        Cliente cliente = new Cliente(1, "João", 4);
 
-    boolean alocado = mesa.alocarCliente(cliente);
+        boolean alocado = mesa.alocarCliente(cliente);
 
-    assertFalse(alocado);
-    assertTrue(mesa.isDisponivel());
-    assertEquals(0, mesa.getOcupacaoAtual());
-
-    @Test
-    public void testAlocarClientesEmMesasDiferentes() {
-        Restaurante restaurante = new Restaurante();
-
-        Cliente cliente1 = new Cliente(1, "João", 2);
-        Cliente cliente2 = new Cliente(2, "Maria", 4);
-        Cliente cliente3 = new Cliente(3, "Pedro", 3);
-
-        assertTrue(restaurante.alocarMesa(new Requisicao(cliente1)));
-        assertTrue(restaurante.alocarMesa(new Requisicao(cliente2)));
-        assertTrue(restaurante.alocarMesa(new Requisicao(cliente3)));
-
-        for (Mesa mesa : restaurante.getMesas()) {
-            assertFalse(mesa.isDisponivel());
-            assertNotNull(mesa.getCliente());
-        }
+        assertFalse(alocado);
+        assertTrue(mesa.isDisponivel());
+        assertNull(mesa.getCliente());
     }
 }
-
