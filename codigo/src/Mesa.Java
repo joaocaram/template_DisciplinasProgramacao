@@ -56,8 +56,6 @@ public class Mesa {
     this.totalConta += totalConta;
   }
 
-
-  // Divide a conta pelo número de pessoas na mesa
   public double dividirConta() {
     return totalConta / this.clientesSentados;
   }
