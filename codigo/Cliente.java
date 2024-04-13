@@ -3,22 +3,58 @@
  */
 public class Cliente {
     
-    private String nome;        
-    private String telContato;  
+    private static int contador = 1;
+    
+    private String nome;
+    private String telContato;
+    private int id;
 
     /**
      * Construtor para inicializar um objeto Cliente com o nome e número de telefone de contato.
      * 
      * @param nome O nome do cliente.
      * @param telContato O número de telefone de contato do cliente.
+     * @param id O ID do cliente.
      */
     public Cliente(String nome, String telContato) {
-        this.nome = nome;
-        this.telContato = telContato;
+        setNome(nome);
+        setTelContato(telContato);
+        id = contador++;
     }
 
     /**
-     * Obter o nome do cliente.
+     * Define o nome do cliente.
+     * 
+     * @param nome O nome a ser definido para o cliente.
+     */
+    public void setNome(String nome) {
+        if(nome.length() >= 3){
+            this.nome = nome;
+        }
+    }
+
+    /**
+     * Define o número de telefone de contato do cliente.
+     * 
+     * @param telContato O número de telefone a ser definido para o cliente.
+     */
+    public void setTelContato(String telContato) {
+        if(telContato.length() >= 11 && telContato.length() <= 17){
+            this.telContato = telContato;
+        }
+    }
+
+    /**
+     * Obtém o ID único do cliente.
+     * 
+     * @return O ID único do cliente.
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Obtém o nome do cliente.
      * 
      * @return O nome do cliente.
      */
@@ -27,7 +63,7 @@ public class Cliente {
     }
 
     /**
-     * Obter o número de telefone de contato do cliente.
+     * Obtém o número de telefone de contato do cliente.
      * 
      * @return O número de telefone de contato do cliente.
      */
@@ -36,11 +72,11 @@ public class Cliente {
     }
 
     /**
-     * Obter uma string contendo os dados do cliente formatados.
+     * Retorna uma string contendo os dados do cliente formatados.
      * 
-     * @return Uma string contendo os dados do cliente (nome e telefone de contato).
+     * @return Uma string contendo os dados do cliente (ID, nome e telefone de contato).
      */
     public String dadosCliente(){
-        return "Nome: " + this.nome + ", Telefone: " + this.telContato;
+        return "ID: " + getId() +  ", Nome: " + getNome() + ", Telefone: " + getTelContato();
     }
 }
