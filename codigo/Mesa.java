@@ -1,3 +1,6 @@
+/**
+ * A classe Mesa representa as mesas do sistema de restaurante.
+ */
 public class Mesa {
 
     private int id;
@@ -32,12 +35,18 @@ public class Mesa {
         this.ocupada = ocupada;
     }
 
-
+/**
+     * Método para realizar a ação de desocupar a mesa, tornando o @param setOcupada false.
+     */
     public boolean desocupar(){
         this.requisicao = null;
         this.setOcupada(false); 
         return !estaOcupada();
     }
+
+    /**
+     * Método para realizar a ação de ocupar a mesa, tornando o @param setOcupada true.
+     */
     public boolean ocupar(Requisicao requisicao){
        
         this.requisicao = requisicao;
