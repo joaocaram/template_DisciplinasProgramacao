@@ -6,6 +6,9 @@ public class Restaurante {
     private ArrayList<Requisicao> historicoAtendimento;
     private Cliente[] listaClientes;
 
+    /**
+     * Método para alocar mesa com a primeira requisição disponível
+     */
     public void alocarMesa() {
         Requisicao requisicao;
         boolean alocado = false;
@@ -14,7 +17,8 @@ public class Restaurante {
         while (!alocado) {
             requisicao = filaAtendimento.get(indice);
             for (Mesa mesa : mesas) {
-                if (mesa.getCapacidade() <= requisicao.getQuantidadePessoas() && !mesa.estaOcupada()) {
+                if (mesa.getCapacidade() <= requisicao.getQuantidadePessoas()
+                        && !mesa.estaOcupada()) {
                     mesa.ocupar(requisicao);
                     removerRequisicao(requisicao);
                     alocado = true;
@@ -25,10 +29,30 @@ public class Restaurante {
         }
     }
 
+    /**
+     * Método para adicionar requisição na lista de requisições
+     * 
+     * @param requisicao requisição que será adicionada a lista
+     */
     public void adicionarRequisicao(Requisicao requisicao) {
         filaAtendimento.add(requisicao);
     }
 
+    /**
+     * Método para remover requisição na lista de requisições
+     * 
+     * @param requisicao requisição que será removida da lista
+     */
+    public void removerRequisicao(Requisicao requisicao) {
+        Double indexRequisicao = indexRequisicao(requisicao);
+        filaAtendimento.remove(indexRequisicao.intValue());
+    }
+
+    /**
+     * Método para fechar a conta da mesa indicada
+     * 
+     * @param mesa mesa que terá a conta fechada
+     */
     public void fecharConta(Mesa mesa) {
         for (Mesa mesaFila : mesas) {
             if (mesa.equals(mesaFila)) {
@@ -38,15 +62,20 @@ public class Restaurante {
         }
     }
 
+    /**
+     * Método para adicionar requisição no histórico de requisições
+     * 
+     * @param requisicao requisição que será adicionada ao histórico
+     */
     public void adicionarAoHistorico(Requisicao requisicao) {
         historicoAtendimento.add(requisicao);
     }
 
-    public void removerRequisicao(Requisicao requisicao) {
-        Double indexRequisicao = indexRequisicao(requisicao);
-        filaAtendimento.remove(indexRequisicao.intValue());
-    }
-
+    /**
+     * Retorna o index da requisição que estamos procurando na fila de atendimento
+     * 
+     * @param requisicao requisição que queremos pesquisar o index
+     */
     private double indexRequisicao(Requisicao requisicao) {
         Double index = -1d;
         for (Requisicao requisicaoFila : filaAtendimento) {
@@ -60,6 +89,11 @@ public class Restaurante {
         return index;
     }
 
+    /**
+     * Retorna a posição do cliente caso seu cadastro já exista no restaurante
+     * 
+     * @param cpf cpf do cliente que estamos procurando
+     */
     public int clienteExiste(String cpf) {
         var index = -1;
         for (Cliente cliente : listaClientes) {
@@ -73,10 +107,15 @@ public class Restaurante {
         return index;
     }
 
-    public Cliente pesquisaCliente(String cpf){
+    /**
+     * Pesquisa o cliente pelo cpf e retorna seus dados
+     * 
+     * @param cpf cpf do cliente que estamos procurando
+     */
+    public Cliente pesquisaCliente(String cpf) {
         Cliente retorno;
-        for (Cliente cliente : listaClientes){
-            if(cliente.getCpf() == cpf){
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getCpf() == cpf) {
                 retorno = cliente;
             }
         }
