@@ -1,5 +1,5 @@
-import java.time.LocalTime;
-    public static void main(String[] args) {
+public class App {
+public static void main(String[] args) {
         //Cadastrar Cliente
         Cliente cliente1 = new Cliente("João Antônio", "965843209");
 
@@ -31,5 +31,6 @@ import java.time.LocalTime;
         //Adiciona a Requisição ao Histórico
         restaurante.adicionarAoHistorico(requisicao1);
     }
+}
 
 
