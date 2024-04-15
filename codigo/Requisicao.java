@@ -39,10 +39,6 @@ public class Requisicao {
       return horaSaida;
     }
 
-    public void setSaida(LocalTime horaSaida){
-        this.horaSaida = horaSaida;
-    }
-
     public int getNumMesa() {
         return mesa.getMesa();
     }
@@ -51,11 +47,7 @@ public class Requisicao {
       return numAcompanhantes;
     }
 
-    public void setNumAcompanhantes(int numAcompanhantes){
-        this.numAcompanhantes = numAcompanhantes;
-    }
-
-    public void salvar(){
-        
+    public void salvar(LocalTime horaSaida){
+        this.horaSaida = horaSaida;
     }
 }
