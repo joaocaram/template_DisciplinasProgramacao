@@ -1,7 +1,7 @@
 public class App {
 public static void main(String[] args) {
         //Cadastrar Cliente
-        Cliente cliente1 = new Cliente("João Antônio", "965843209");
+        Cliente cliente1 = new Cliente("João Antônio", "965843209", "237.267.373-56");
 
         //Atender cliente/criar requisição
         Requisicao requisicao1 = new Requisicao(cliente1);
