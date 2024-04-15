@@ -6,6 +6,40 @@ public class Restaurante {
     private ArrayList<Requisicao> historicoAtendimento;
     private ArrayList<Cliente> listaClientes;
 
+    private void setfilaAtendimento(ArrayList<Requisicao> filaAtendimento){
+        this.filaAtendimento = filaAtendimento;
+    }
+
+    private void setHistoricoAtendimento(ArrayList<Requisicao> historicoAtendimento){
+        this.historicoAtendimento = historicoAtendimento;
+    }
+
+    private void setlistaClientes(ArrayList<Cliente> listaClientes){
+        this.listaClientes = listaClientes;
+    }
+
+    private void iniciaMesas(){
+        int[] capacidades = {4,6,8};
+        int[] quant = {4,4,2};
+
+        Mesa mesa = null;
+        
+        for (int i = 0; i < quant.length; i++) {
+            int quantidade = quant[i];
+            for (int j = 0; j < quantidade; j++) {
+                mesa = new Mesa(capacidades[i]);    
+                mesas.add(mesa);    
+            }            
+        }
+    }
+
+    Restaurante(){
+        setfilaAtendimento(new ArrayList<Requisicao>());
+        setlistaClientes(new ArrayList<Cliente>());
+        setHistoricoAtendimento(new ArrayList<Requisicao>());
+        iniciaMesas();
+    }
+
     /**
      * Método para alocar mesa com a primeira requisição disponível
      */
