@@ -1,34 +1,34 @@
 import java.time.LocalTime;
     public static void main(String[] args) {
-        //Instanciar Clientes com Nome e Celular
+        //Cadastrar Cliente
         Cliente cliente1 = new Cliente("João Antônio", "965843209");
 
-        //Criando a requisição do Cliente
+        //Atender cliente/criar requisição
         Requisicao requisicao1 = new Requisicao(cliente1);
 
-        //Cliente diz qual o número de mesas
+        //Cliente diz qual o número pessoas na Mesa
         requisicao1.requerirMesa(4);
 
-        // Criando instâncias de mesas
+        //Criar Mesa
         Mesa mesa1 = new Mesa();
         mesa1.setCapacidade(4);
 
-        // Criando uma instância de restaurante
+        //Instância de Restaurante
         Restaurante restaurante = new Restaurante();
 
-        // Adicionando as requisições à fila de atendimento do restaurante
+        //Adiciona a Requisição à fila
         restaurante.adicionarRequisicao(requisicao1);
 
-        // Realizando a alocação de mesas
+        //Aloca a Mesa
         restaurante.alocarMesa();
 
-        // Imprimindo informações sobre as mesas após a alocação
+        //Confirma se a Mesa está ocupada, após alocar 
         System.out.println("Mesa 1 está ocupada? " + mesa1.estaOcupada());
 
-        // Fechando a conta da mesa 1
+        //Liberar Mesa/Finalizar Requisição
         restaurante.fecharConta(mesa1);
 
-        // Adicionando as requisições ao histórico de atendimento do restaurante
+        //Adiciona a Requisição ao Histórico
         restaurante.adicionarAoHistorico(requisicao1);
     }
 
