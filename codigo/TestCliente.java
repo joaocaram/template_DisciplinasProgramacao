@@ -8,7 +8,7 @@ public class TestCliente {
 
     @Before
     public void setup(){
-        c = new Cliente("João", "123456789", "23726737356");
+        c = new Cliente("João", "31988776655", "23726737356");
     }
 
     @Test
@@ -18,11 +18,16 @@ public class TestCliente {
 
     @Test
     public void testGetTelContato() {
-        assertEquals("123456789", c.getTelContato());
+        assertEquals("31988776655", c.getTelContato());
+    }
+
+    @Test
+    public void testGetCPF() {
+        assertEquals("23726737356", c.getCPF());
     }
 
     @Test
     public void coletarDadosCliente() {
-        assertEquals("Nome: João, Telefone: 123456789", c.dadosCliente());
+        assertEquals("ID: 1, Nome: João, Telefone: 31988776655, CPF: 23726737356", c.dadosCliente());
     }
 }
