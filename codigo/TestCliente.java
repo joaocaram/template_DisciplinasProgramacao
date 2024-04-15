@@ -8,7 +8,7 @@ public class TestCliente {
 
     @Before
     public void setup(){
-        c = new Cliente("João", "123456789");
+        c = new Cliente("João", "123456789", "23726737356");
     }
 
     @Test
