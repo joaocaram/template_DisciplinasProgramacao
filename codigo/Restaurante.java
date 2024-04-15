@@ -4,7 +4,7 @@ public class Restaurante {
     private ArrayList<Mesa> mesas;
     private ArrayList<Requisicao> filaAtendimento;
     private ArrayList<Requisicao> historicoAtendimento;
-    private Cliente[] listaClientes;
+    private ArrayList<Cliente> listaClientes;
 
     /**
      * Método para alocar mesa com a primeira requisição disponível
@@ -97,7 +97,7 @@ public class Restaurante {
     public int clienteExiste(String cpf) {
         var index = -1;
         for (Cliente cliente : listaClientes) {
-            if (cliente.getCpf() == cpf) {
+            if (cliente.getCPF() == cpf) {
                 return index;
             }
 
@@ -108,18 +108,11 @@ public class Restaurante {
     }
 
     /**
-     * Pesquisa o cliente pelo cpf e retorna seus dados
+     * Retorna os dados do cliente na posição da fila do atendimento solicitada
      * 
-     * @param cpf cpf do cliente que estamos procurando
+     * @param posicao posicao do cliente que estamos procurando
      */
-    public Cliente pesquisaCliente(String cpf) {
-        Cliente retorno;
-        for (Cliente cliente : listaClientes) {
-            if (cliente.getCpf() == cpf) {
-                retorno = cliente;
-            }
-        }
-
-        return retorno;
+    private Requisicao getClienteAtendimento (int posicao){
+        return filaAtendimento.get(posicao);
     }
 }
