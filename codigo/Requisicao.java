@@ -8,6 +8,7 @@ public class Requisicao {
     private LocalTime horaSaida;
     private Mesa mesa;
     private int numAcompanhantes;
+    private boolean encerrada
 
     public Requisicao(Cliente cliente, LocalDate data, LocalTime horaEntrada, LocalTime horaSaida, Mesa mesa, int numAcompanhantes) {
         this.cliente = cliente;
@@ -39,7 +40,7 @@ public class Requisicao {
       return horaSaida;
     }
 
-    public int getNumMesa() {
+    public void alocarMesa(Mesa mesa) {
         return mesa.getMesa();
     }
 
