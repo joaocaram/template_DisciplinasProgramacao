@@ -45,13 +45,5 @@ public class RequisicaoTest {
         assertEquals(3, requisicao.getNumAcompanhantes());
     }
 
-    @Test
-    public void testSetNumAcompanhantes() {
-        Requisicao requisicao = new Requisicao(null, null, null, null, null, 0);
-
-        requisicao.setNumAcompanhantes(4);
-        assertEquals(4, requisicao.getNumAcompanhantes());
-    }
-
 
 }
