@@ -4,6 +4,7 @@ public class Restaurante {
     private ArrayList<Mesa> mesas;
     private ArrayList<Requisicao> filaAtendimento;
     private ArrayList<Requisicao> historicoAtendimento;
+    private Cliente[] listaClientes;
 
     public void alocarMesa() {
         Requisicao requisicao;
@@ -57,5 +58,29 @@ public class Restaurante {
         }
 
         return index;
+    }
+
+    public int clienteExiste(String cpf) {
+        var index = -1;
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getCpf() == cpf) {
+                return index;
+            }
+
+            index++;
+        }
+
+        return index;
+    }
+
+    public Cliente pesquisaCliente(String cpf){
+        Cliente retorno;
+        for (Cliente cliente : listaClientes){
+            if(cliente.getCpf() == cpf){
+                retorno = cliente;
+            }
+        }
+
+        return retorno;
     }
 }
