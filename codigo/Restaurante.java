@@ -6,34 +6,34 @@ public class Restaurante {
     private ArrayList<Requisicao> historicoAtendimento;
     private ArrayList<Cliente> listaClientes;
 
-    private void setfilaAtendimento(ArrayList<Requisicao> filaAtendimento){
+    private void setfilaAtendimento(ArrayList<Requisicao> filaAtendimento) {
         this.filaAtendimento = filaAtendimento;
     }
 
-    private void setHistoricoAtendimento(ArrayList<Requisicao> historicoAtendimento){
+    private void setHistoricoAtendimento(ArrayList<Requisicao> historicoAtendimento) {
         this.historicoAtendimento = historicoAtendimento;
     }
 
-    private void setlistaClientes(ArrayList<Cliente> listaClientes){
+    private void setlistaClientes(ArrayList<Cliente> listaClientes) {
         this.listaClientes = listaClientes;
     }
 
-    private void iniciaMesas(){
-        int[] capacidades = {4,6,8};
-        int[] quant = {4,4,2};
+    private void iniciaMesas() {
+        int[] capacidades = { 4, 6, 8 };
+        int[] quant = { 4, 4, 2 };
 
         Mesa mesa = null;
-        
+
         for (int i = 0; i < quant.length; i++) {
             int quantidade = quant[i];
             for (int j = 0; j < quantidade; j++) {
-                mesa = new Mesa(capacidades[i]);    
-                mesas.add(mesa);    
-            }            
+                mesa = new Mesa(capacidades[i]);
+                mesas.add(mesa);
+            }
         }
     }
 
-    Restaurante(){
+    Restaurante() {
         setfilaAtendimento(new ArrayList<Requisicao>());
         setlistaClientes(new ArrayList<Cliente>());
         setHistoricoAtendimento(new ArrayList<Requisicao>());
@@ -78,8 +78,8 @@ public class Restaurante {
      * @param requisicao requisição que será removida da lista
      */
     public void removerRequisicao(Requisicao requisicao) {
-        Double indexRequisicao = indexRequisicao(requisicao);
-        filaAtendimento.remove(indexRequisicao.intValue());
+        Double index = indexRequisicao(requisicao);
+        filaAtendimento.remove(index.intValue());
     }
 
     /**
@@ -123,13 +123,35 @@ public class Restaurante {
         return index;
     }
 
+    
+    /**
+     * Cria e retorna o cliente cadastrado no sistema
+     * 
+     * @param nome nome do cliente que será cadastrado
+     * @param telContato telefone do cliente que será cadastrado
+     * @param cpf cpf do cliente que será cadastrado
+     */
+    public Cliente cadastraCliente(String nome, String telContato, String cpf) {
+        Cliente cliente;
+
+        int indiceCliente = getIndiceCliente(cpf);
+        if (indiceCliente != -1) {
+            cliente = getClienteAtendimento(indiceCliente);
+        } else {
+            cliente = new Cliente(nome, telContato, cpf);
+            listaClientes.add(cliente);
+        }
+
+        return cliente;
+    }
+
     /**
      * Retorna a posição do cliente caso seu cadastro já exista no restaurante
      * 
      * @param cpf cpf do cliente que estamos procurando
      */
-    public int clienteExiste(String cpf) {
-        var index = -1;
+    public int getIndiceCliente(String cpf) {
+        int index = -1;
         for (Cliente cliente : listaClientes) {
             if (cliente.getCPF() == cpf) {
                 return index;
@@ -146,7 +168,7 @@ public class Restaurante {
      * 
      * @param posicao posicao do cliente que estamos procurando
      */
-    private Requisicao getClienteAtendimento (int posicao){
-        return filaAtendimento.get(posicao);
+    private Cliente getClienteAtendimento(int posicao) {
+        return listaClientes.get(posicao);
     }
 }
