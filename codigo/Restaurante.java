@@ -64,8 +64,6 @@ public class Restaurante {
         }
     }
 
-    
-
     /**
      * Método para fechar a conta da mesa indicada
      * 
@@ -80,7 +78,13 @@ public class Restaurante {
         }
     }
 
-    private void criarRequisicao(String cpf, int qntPessoas){
+    /**
+     * Cria nova requisição a partir do cpf e quantidade de clientes informados
+     * 
+     * @param cpf cpf do cliente dono da requisição
+     * @param qntPessoas quantidade de pessoas para a mesa
+     */
+    private void criarRequisicao(String cpf, int qntPessoas) {
         int indice = getIndiceListaClientes(cpf);
         Cliente cliente = getCliente(indice);
         Requisicao requisicao = new Requisicao(cliente, qntPessoas);
@@ -147,13 +151,12 @@ public class Restaurante {
         return false;
     }
 
-    
     /**
      * Cadastra cliente no sistema
      * 
-     * @param nome nome do cliente que será cadastrado
+     * @param nome       nome do cliente que será cadastrado
      * @param telContato telefone do cliente que será cadastrado
-     * @param cpf cpf do cliente que será cadastrado
+     * @param cpf        cpf do cliente que será cadastrado
      */
     public void newCliente(String nome, String telContato, String cpf) {
         Cliente cliente = new Cliente(nome, telContato, cpf);
@@ -180,7 +183,8 @@ public class Restaurante {
     }
 
     /**
-     * Retorna os dados do cliente na lista de clientes do restaurante, na posição solicitada
+     * Retorna os dados do cliente na lista de clientes do restaurante, na posição
+     * solicitada
      * 
      * @param posicao posicao do cliente que estamos procurando
      */
