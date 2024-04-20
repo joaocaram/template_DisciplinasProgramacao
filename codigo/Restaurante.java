@@ -141,7 +141,7 @@ public class Restaurante {
      * 
      * @param cpf string com o cpf do cliente que estamos procurando
      */
-    private boolean clienteExiste(String cpf) {
+    public boolean clienteExiste(String cpf) {
         for (Cliente cliente : listaClientes) {
             if (cliente.getCPF() == cpf) {
                 return true;
