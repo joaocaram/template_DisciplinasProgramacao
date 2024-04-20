@@ -10,45 +10,61 @@ public class Requisicao {
     private int numAcompanhantes;
     private boolean encerrada
 
-    public Requisicao(Cliente cliente, LocalDate data, LocalTime horaEntrada, LocalTime horaSaida, Mesa mesa, int numAcompanhantes) {
+    public Requisicao(Cliente cliente, LocalDate data, LocalTime horaEntrada, int numAcompanhantes) {
         this.cliente = cliente;
         this.data = data;
         this.horaEntrada = horaEntrada;
-        this.horaSaida = horaSaida;
-        this.mesa = mesa;
         this.numAcompanhantes = numAcompanhantes;
-
+        this.encerrada = false;
     }
 
-    public String getNomeCliente() {
-        return cliente.getNome();
-    }
-
-    public LocalDate getData() {
-      return data;
-    }
-
-    public void setData(LocalDate data){
-        this.data = data;
-    }
-
-    public LocalTime getEntrada() {
-      return horaEntrada;
-    }
-
-    public LocalTime getSaida() {
-      return horaSaida;
+     public Mesa encerrar(LocalTime horaSaida) {
+        this.horaSaida = horaSaida;
+        this.encerrada = true;
+        return this.mesa;
     }
 
     public void alocarMesa(Mesa mesa) {
-        return mesa.getMesa();
+        this.mesa = mesa;
+    }
+
+    public boolean estaEncerrada() {
+        return this.encerrada;
+    }
+
+    public boolean ehDaMesa(int idMesa) {
+        return this.mesa != null && this.mesa.getId() == idMesa;
+    }
+
+    public int quantPessoas() {
+        return this.numAcompanhantes;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public LocalTime getHoraEntrada() {
+        return horaEntrada;
+    }
+
+    public LocalTime getHoraSaida() {
+        return horaSaida;
+    }
+
+    public Mesa getMesa() {
+        return mesa;
     }
 
     public int getNumAcompanhantes() {
-      return numAcompanhantes;
+        return numAcompanhantes;
     }
 
-    public void salvar(LocalTime horaSaida){
-        this.horaSaida = horaSaida;
+    public boolean isEncerrada() {
+        return encerrada;
     }
 }
