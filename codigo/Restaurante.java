@@ -6,6 +6,13 @@ public class Restaurante {
     private ArrayList<Requisicao> historicoAtendimento;
     private ArrayList<Cliente> listaClientes;
 
+    Restaurante() {
+        setfilaAtendimento(new ArrayList<Requisicao>());
+        setlistaClientes(new ArrayList<Cliente>());
+        setHistoricoAtendimento(new ArrayList<Requisicao>());
+        iniciaMesas();
+    }
+
     private void setfilaAtendimento(ArrayList<Requisicao> filaAtendimento) {
         this.filaAtendimento = filaAtendimento;
     }
@@ -33,13 +40,6 @@ public class Restaurante {
         }
     }
 
-    Restaurante() {
-        setfilaAtendimento(new ArrayList<Requisicao>());
-        setlistaClientes(new ArrayList<Cliente>());
-        setHistoricoAtendimento(new ArrayList<Requisicao>());
-        iniciaMesas();
-    }
-
     /**
      * Método para alocar mesa com a primeira requisição disponível
      */
@@ -54,7 +54,8 @@ public class Restaurante {
                 if (mesa.getCapacidade() <= requisicao.getQuantidadePessoas()
                         && !mesa.estaOcupada()) {
                     mesa.ocupar(requisicao);
-                    removerRequisicao(requisicao);
+                    int indiceReq = indexListaRequisicao(requisicao);
+                    removerRequisicaoFila(indiceReq);
                     alocado = true;
                 }
             }
@@ -63,24 +64,7 @@ public class Restaurante {
         }
     }
 
-    /**
-     * Método para adicionar requisição na lista de requisições
-     * 
-     * @param requisicao requisição que será adicionada a lista
-     */
-    public void adicionarRequisicao(Requisicao requisicao) {
-        filaAtendimento.add(requisicao);
-    }
-
-    /**
-     * Método para remover requisição na lista de requisições
-     * 
-     * @param requisicao requisição que será removida da lista
-     */
-    public void removerRequisicao(Requisicao requisicao) {
-        Double index = indexRequisicao(requisicao);
-        filaAtendimento.remove(index.intValue());
-    }
+    
 
     /**
      * Método para fechar a conta da mesa indicada
@@ -96,13 +80,11 @@ public class Restaurante {
         }
     }
 
-    /**
-     * Método para adicionar requisição no histórico de requisições
-     * 
-     * @param requisicao requisição que será adicionada ao histórico
-     */
-    public void adicionarAoHistorico(Requisicao requisicao) {
-        historicoAtendimento.add(requisicao);
+    private void criarRequisicao(String cpf, int qntPessoas){
+        int indice = getIndiceListaClientes(cpf);
+        Cliente cliente = getCliente(indice);
+        Requisicao requisicao = new Requisicao(cliente, qntPessoas);
+        adicionarRequisicaoFila(requisicao);
     }
 
     /**
@@ -110,8 +92,8 @@ public class Restaurante {
      * 
      * @param requisicao requisição que queremos pesquisar o index
      */
-    private double indexRequisicao(Requisicao requisicao) {
-        Double index = -1d;
+    private int indexListaRequisicao(Requisicao requisicao) {
+        int index = -1;
         for (Requisicao requisicaoFila : filaAtendimento) {
             if (requisicaoFila.equals(requisicao)) {
                 return index;
@@ -123,34 +105,68 @@ public class Restaurante {
         return index;
     }
 
+    /**
+     * Método para adicionar requisição na lista de requisições
+     * 
+     * @param requisicao requisição que será adicionada a lista
+     */
+    public void adicionarRequisicaoFila(Requisicao requisicao) {
+        filaAtendimento.add(requisicao);
+    }
+
+    /**
+     * Método para remover requisição na lista de requisições
+     * 
+     * @param requisicao requisição que será removida da lista
+     */
+    public void removerRequisicaoFila(int index) {
+        filaAtendimento.remove(index);
+    }
+
+    /**
+     * Método para adicionar requisição no histórico de requisições
+     * 
+     * @param requisicao requisição que será adicionada ao histórico
+     */
+    public void adicionarRequisicaoAoHistorico(Requisicao requisicao) {
+        historicoAtendimento.add(requisicao);
+    }
+
+    /**
+     * Retorna se o cadastro do cliente existe ou não no restaurante
+     * 
+     * @param cpf string com o cpf do cliente que estamos procurando
+     */
+    private boolean clienteExiste(String cpf) {
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getCPF() == cpf) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     
     /**
-     * Cria e retorna o cliente cadastrado no sistema
+     * Cadastra cliente no sistema
      * 
      * @param nome nome do cliente que será cadastrado
      * @param telContato telefone do cliente que será cadastrado
      * @param cpf cpf do cliente que será cadastrado
      */
-    public Cliente cadastraCliente(String nome, String telContato, String cpf) {
-        Cliente cliente;
-
-        int indiceCliente = getIndiceCliente(cpf);
-        if (indiceCliente != -1) {
-            cliente = getClienteAtendimento(indiceCliente);
-        } else {
-            cliente = new Cliente(nome, telContato, cpf);
-            listaClientes.add(cliente);
-        }
-
-        return cliente;
+    public void newCliente(String nome, String telContato, String cpf) {
+        Cliente cliente = new Cliente(nome, telContato, cpf);
+        listaClientes.add(cliente);
+        return;
     }
 
     /**
-     * Retorna a posição do cliente caso seu cadastro já exista no restaurante
+     * Retorna a posição do cliente na lista de clientes do restaurante
      * 
      * @param cpf cpf do cliente que estamos procurando
      */
-    public int getIndiceCliente(String cpf) {
+    public int getIndiceListaClientes(String cpf) {
         int index = -1;
         for (Cliente cliente : listaClientes) {
             if (cliente.getCPF() == cpf) {
@@ -164,11 +180,11 @@ public class Restaurante {
     }
 
     /**
-     * Retorna os dados do cliente na posição da fila do atendimento solicitada
+     * Retorna os dados do cliente na lista de clientes do restaurante, na posição solicitada
      * 
      * @param posicao posicao do cliente que estamos procurando
      */
-    private Cliente getClienteAtendimento(int posicao) {
+    private Cliente getCliente(int posicao) {
         return listaClientes.get(posicao);
     }
 }
