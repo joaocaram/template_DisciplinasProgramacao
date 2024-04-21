@@ -25,6 +25,22 @@ public class Restaurante {
         this.listaClientes = listaClientes;
     }
 
+    private void iniciaMenu() {
+        String[] itensComida = { "Moqueca de Pamito", "Falafel Assado", "Salada Primavera com Macarrão Konjac", "Escondidinho de Inhame", "Strogonoff de Cogumelos", "Caçarola de legumes"};
+        String [] itensBebida = { "Água", "Copo de Suco", "Refrigerante orgânico", "Cerveja vegana", "Taça de vinho vegano"};
+        Integer[] valorComida = { 32, 20, 25, 18, 35, 22 };
+        Integer[] valorBebida = { 3, 7, 7, 9, 18};
+    
+        Menu menu = new Menu();
+    
+        for (int i = 0; i < itensComida.length; i++) {
+            menu.adicionarProduto(itensComida[i], valorComida[i]);
+        }
+        for (int i = 0; i < itensBebida.length; i++) {
+            menu.adicionarProduto(itensBebida[i], valorBebida[i]);
+        }
+    }
+
     private void iniciaMesas() {
         int[] capacidades = { 4, 6, 8 };
         int[] quant = { 4, 4, 2 };
