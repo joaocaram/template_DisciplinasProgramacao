@@ -18,12 +18,14 @@ public class Requisicao {
      * Inicializa um objeto Requisicao associado ao cliente fornecido,
      * com a data e hora atuais e sem hora de saída definida.
      * @param cliente O cliente que está fazendo a requisição.
+     * @param quantidadePessoas A quantidade de pessoas na reserva.
      */
-    public Requisicao(Cliente cliente) {
+    public Requisicao(Cliente cliente, int quantidadePessoas) {
         this.cliente = cliente;
         this.data = LocalDate.now(); // Define a data como a data atual
         this.horaEntrada = LocalTime.now(); // Define a hora de entrada como a hora atual
         this.horaSaida = null; // A hora de saída é inicializada como nula
+        this.quantidadePessoas = quantidadePessoas; // Define a quantidade de pessoas
     }
 
     /**
