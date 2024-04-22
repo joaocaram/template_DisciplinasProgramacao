@@ -79,11 +79,11 @@ public class Mesa {
         setID(contador++);
     }
 
-    public void adicionaPedido(Produto produto){
+    public void adicionaProduto(Produto produto){
         pedido.add(produto);
     }
 
-    public void removerPedido(Produto produto){
+    public void removerProduto(Produto produto){
         pedido.remove(produto);
     }
 }
