@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * A classe Mesa representa as mesas do sistema de restaurante.
  */
@@ -9,7 +11,15 @@ public class Mesa {
     private int capacidade;
     private boolean ocupada;
     private Requisicao requisicao;
+    private ArrayList<Produto> pedido;
 
+    public ArrayList<Produto> getPedidos(){
+        return pedido;
+    }
+
+    public void setPedidos(ArrayList<Produto> pedido){
+        this.pedido = pedido;
+    }
 
     public int getCapacidade() {
         return capacidade;
@@ -68,4 +78,13 @@ public class Mesa {
         setOcupada(false);
         setID(contador++);
     }
+
+    public void adicionaPedido(Produto produto){
+        pedido.add(produto);
+    }
+
+    public void removerPedido(Produto produto){
+        pedido.remove(produto);
+    }
 }
+
