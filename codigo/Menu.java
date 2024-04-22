@@ -8,7 +8,7 @@ public class Menu {
         produtos = new ArrayList<>();
     }
 
-    public void adicionarProduto(String nome, Integer preco) {
+    public void adicionarProduto(String nome, double preco) {
         Produto novoProduto = new Produto(nome, preco);
         produtos.add(novoProduto);
     }

@@ -105,4 +105,7 @@ public class Requisicao {
             System.out.println("Quantidade de pessoas inválida.");
         }
     }
+    public String toString(){
+        return this.horaEntrada + " - " + this.cliente;
+    }
 }

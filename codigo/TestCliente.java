@@ -28,6 +28,6 @@ public class TestCliente {
 
     @Test
     public void coletarDadosCliente() {
-        assertEquals("ID: 1, Nome: João, Telefone: 31988776655, CPF: 23726737356", c.dadosCliente());
+        assertEquals("ID: 1, Nome: João, Telefone: 31988776655, CPF: 23726737356", c.toString());
     }
 }
