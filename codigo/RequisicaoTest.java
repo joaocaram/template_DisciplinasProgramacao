@@ -1,49 +1,48 @@
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class RequisicaoTest {
+class RequisicaoTest {
 
     @Test
-    public void testGetNomeCliente() {
-        Cliente cliente = new Cliente("João");
-        Requisicao requisicao = new Requisicao(cliente, LocalDate.now(), LocalTime.now(), LocalTime.now(), new Mesa(1), 2);
+    void testEncerrarRequisicaoJaEncerrada() {
+        Cliente cliente = new Cliente("Cliente1");
+        Mesa mesa = new Mesa(1);
+        Requisicao req = new Requisicao(cliente, LocalDate.now(), LocalTime.of(14, 0), 4);
+        req.alocarMesa(mesa);
+        req.encerrar(LocalTime.of(15, 0));
 
-        assertEquals("João", requisicao.getNomeCliente());
+        assertThrows(IllegalStateException.class, () -> req.encerrar(LocalTime.of(16, 0)),
+                     "Deveria lançar uma exceção ao tentar encerrar uma requisição já encerrada");
     }
 
     @Test
-    public void testGetData() {
-        LocalDate data = LocalDate.of(2022, 4, 14);
-        Requisicao requisicao = new Requisicao(null, data, null, null, null, 0);
-
-        assertEquals(data, requisicao.getData());
+    void testAlocarMesaQuandoJaAlocada() {
+        Cliente cliente = new Cliente("Cliente1");
+        Mesa mesa1 = new Mesa(1);
+        Mesa mesa2 = new Mesa(2);
+        Requisicao req = new Requisicao(cliente, LocalDate.now(), LocalTime.of(14, 0), 4);
+        req.alocarMesa(mesa1);
+        req.alocarMesa(mesa2);
+        
+        assertEquals(2, req.getMesa().getId(), "A mesa deveria ser atualizada para a nova mesa");
     }
 
     @Test
-    public void testSetSaida() {
-        LocalTime horaSaida = LocalTime.of(12, 0);
-        Requisicao requisicao = new Requisicao(null, null, null, null, null, 0);
+    void testEhDaMesaSemMesaAlocada() {
+        Cliente cliente = new Cliente("Cliente1");
+        Requisicao req = new Requisicao(cliente, LocalDate.now(), LocalTime.of(14, 0), 4);
 
-        requisicao.setSaida(horaSaida);
-        assertEquals(horaSaida, requisicao.getSaida());
+        assertFalse(req.ehDaMesa(1), "Deveria retornar false já que nenhuma mesa foi alocada");
     }
 
     @Test
-    public void testGetNumMesa() {
-        Mesa mesa = new Mesa(5);
-        Requisicao requisicao = new Requisicao(null, null, null, null, mesa, 0);
+    void testEncerrarComHoraSaidaAntesDeHoraEntrada() {
+        Cliente cliente = new Cliente("Cliente1");
+        Requisicao req = new Requisicao(cliente, LocalDate.now(), LocalTime.of(14, 0), 4);
 
-        assertEquals(5, requisicao.getNumMesa());
+        assertThrows(IllegalArgumentException.class, () -> req.encerrar(LocalTime.of(13, 0)),
+                     "Deveria lançar uma exceção quando a hora de saída é antes da hora de entrada");
     }
-
-    @Test
-    public void testGetNumAcompanhantes() {
-        Requisicao requisicao = new Requisicao(null, null, null, null, null, 3);
-
-        assertEquals(3, requisicao.getNumAcompanhantes());
-    }
-
-
 }
