@@ -209,7 +209,7 @@ public class Restaurante {
 
     public void mostrarFilaAtendimento(){
         for(int i = 0; i < filaAtendimento.size() ; i++ ){
-            System.out.println(filaAtendimento.get(i));
+            System.out.println(filaAtendimento.get(i).getCliente());
         }
     }
 }
