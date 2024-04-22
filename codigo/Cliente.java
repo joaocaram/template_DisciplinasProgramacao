@@ -1,41 +1,23 @@
 public class Cliente {
-    private String nome;
-    private int numPessoas;
+    private static int contadorId = 1;
     private int idCliente;
-
-    public Cliente(String nome, int numPessoas, int idCliente) {
-        this.nome = nome;
-        this.numPessoas = numPessoas;
-        this.idCliente = idCliente;
+  
+    private String nome;
+  
+    public Cliente(String nome) {
+      setNome(nome); 
+      this.idCliente = contadorId++;
     }
-
+  
     public String getNome() {
-        return nome;
+      return nome;
     }
-
+  
     public void setNome(String nome) {
-        this.nome = nome;
+      this.nome = nome;
     }
-
-    public int getNumPessoas() {
-        return numPessoas;
-    }
-
-    public void setNumPessoas(int numPessoas) {
-        this.numPessoas = numPessoas;
-    }
-
+  
     public int getIdCliente() {
-        return idCliente;
+      return idCliente;
     }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public void imprimeCliente() {
-        System.out.println("Nome: " + nome);
-        System.out.println("Número de pessoas: " + numPessoas);
-        System.out.println("ID do cliente: " + idCliente);
-    }
-}
+  }
