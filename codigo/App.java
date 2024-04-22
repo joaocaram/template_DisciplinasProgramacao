@@ -47,7 +47,6 @@ Requisição, eu chamo aqui no Main, depois de pedir o número de pessoas.
                     nome = scanner.nextLine();
                     System.out.println("Digite o telefone de contato: ");
                     telContato = scanner.nextLine();
-                    // Ele tá pulando esse scan
                     restaurante.newCliente(nome, telContato, CPF);
 
                 }
