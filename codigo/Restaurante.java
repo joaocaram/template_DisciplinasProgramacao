@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Restaurante {
     private ArrayList<Mesa> mesas;
-    private ArrayList<Requisicao> filaAtendimento;
+    public ArrayList<Requisicao> filaAtendimento;
     private ArrayList<Requisicao> historicoAtendimento;
     private ArrayList<Cliente> listaClientes;
 
@@ -11,6 +11,7 @@ public class Restaurante {
         setlistaClientes(new ArrayList<Cliente>());
         setHistoricoAtendimento(new ArrayList<Requisicao>());
         iniciaMesas();
+        iniciaMenu();
     }
 
     private void setfilaAtendimento(ArrayList<Requisicao> filaAtendimento) {
@@ -23,6 +24,22 @@ public class Restaurante {
 
     private void setlistaClientes(ArrayList<Cliente> listaClientes) {
         this.listaClientes = listaClientes;
+    }
+
+    private void iniciaMesas() {
+        int[] capacidades = { 4, 6, 8 };
+        int[] quant = { 4, 4, 2 };
+
+        mesas = new ArrayList<Mesa>();
+        Mesa mesa;
+
+        for (int i = 0; i < quant.length; i++) {
+            int quantidade = quant[i];
+            for (int j = 0; j < quantidade; j++) {
+                mesa = new Mesa(capacidades[i]);
+                mesas.add(mesa);
+            }
+        }
     }
 
     private void iniciaMenu() {
@@ -40,21 +57,7 @@ public class Restaurante {
             menu.adicionarProduto(itensBebida[i], valorBebida[i]);
         }
     }
-
-    private void iniciaMesas() {
-        int[] capacidades = { 4, 6, 8 };
-        int[] quant = { 4, 4, 2 };
-
-        Mesa mesa = null;
-
-        for (int i = 0; i < quant.length; i++) {
-            int quantidade = quant[i];
-            for (int j = 0; j < quantidade; j++) {
-                mesa = new Mesa(capacidades[i]);
-                mesas.add(mesa);
-            }
-        }
-    }
+    
 
     /**
      * Método para alocar mesa com a primeira requisição disponível
@@ -80,6 +83,8 @@ public class Restaurante {
         }
     }
 
+    
+
     /**
      * Método para fechar a conta da mesa indicada
      * 
@@ -94,13 +99,7 @@ public class Restaurante {
         }
     }
 
-    /**
-     * Cria nova requisição a partir do cpf e quantidade de clientes informados
-     * 
-     * @param cpf cpf do cliente dono da requisição
-     * @param qntPessoas quantidade de pessoas para a mesa
-     */
-    private void criarRequisicao(String cpf, int qntPessoas) {
+    public void criarRequisicao(String cpf, int qntPessoas){
         int indice = getIndiceListaClientes(cpf);
         Cliente cliente = getCliente(indice);
         Requisicao requisicao = new Requisicao(cliente, qntPessoas);
@@ -167,12 +166,13 @@ public class Restaurante {
         return false;
     }
 
+    
     /**
      * Cadastra cliente no sistema
      * 
-     * @param nome       nome do cliente que será cadastrado
+     * @param nome nome do cliente que será cadastrado
      * @param telContato telefone do cliente que será cadastrado
-     * @param cpf        cpf do cliente que será cadastrado
+     * @param cpf cpf do cliente que será cadastrado
      */
     public void newCliente(String nome, String telContato, String cpf) {
         Cliente cliente = new Cliente(nome, telContato, cpf);
@@ -199,12 +199,17 @@ public class Restaurante {
     }
 
     /**
-     * Retorna os dados do cliente na lista de clientes do restaurante, na posição
-     * solicitada
+     * Retorna os dados do cliente na lista de clientes do restaurante, na posição solicitada
      * 
      * @param posicao posicao do cliente que estamos procurando
      */
     private Cliente getCliente(int posicao) {
         return listaClientes.get(posicao);
+    }
+
+    public void mostrarFilaAtendimento(){
+        for(int i = 0; i < filaAtendimento.size() ; i++ ){
+            System.out.println(filaAtendimento.get(i));
+        }
     }
 }
