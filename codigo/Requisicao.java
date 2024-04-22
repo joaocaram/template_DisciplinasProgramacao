@@ -1,34 +1,39 @@
-package Requisicao;
+package com.projetoLPM;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Requisicao {
     private int idRequisicao;
-    private int idCliente;
+    private Cliente cliente;
+    private Mesa mesa;
     private int numPessoas;
     private LocalDateTime dataHoraEntrada;
     private LocalDateTime dataHoraSaida;
     private boolean atendida;
+    private double conta;
 
-    public Requisicao(int idRequisicao, int idCliente, int numPessoas, LocalDateTime dataHoraEntrada) {
+    public Requisicao(int idRequisicao, Cliente cliente, Mesa mesa, int numPessoas, LocalDateTime dataHoraEntrada) {
         this.idRequisicao = idRequisicao;
-        this.idCliente = idCliente;
+        this.cliente = cliente;
+        this.mesa = mesa;
         this.numPessoas = numPessoas;
         this.dataHoraEntrada = dataHoraEntrada;
         this.dataHoraSaida = null;
         this.atendida = false;
+        this.conta = 0.0;
     }
 
-    public Duration calcularDuracao() {
+    public long calcularDuracao() {
         if (dataHoraSaida != null) {
-            return Duration.between(dataHoraEntrada, dataHoraSaida);
+            Duration duracao = Duration.between(dataHoraEntrada, dataHoraSaida);
+            return duracao.toMinutes();
         } else {
-            return Duration.ZERO;
+            return 0;
         }
     }
 
-    public boolean alocarCliente(Cliente cliente, int numPessoasDesejadas) {
+    public boolean alocarCliente(int numPessoasDesejadas) {
         if (!atendida && numPessoasDesejadas <= numPessoas) {
             atendida = true;
             return true;
@@ -47,8 +52,12 @@ public class Requisicao {
         return idRequisicao;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public Mesa getMesa() {
+        return mesa;
     }
 
     public int getNumPessoas() {
@@ -62,6 +71,11 @@ public class Requisicao {
     public LocalDateTime getDataHoraSaida() {
         return dataHoraSaida;
     }
+    
+    public void setDataHoraSaida(LocalDateTime dataHoraSaida) {
+        this.dataHoraSaida = dataHoraSaida;
+    }
+
 
     public boolean isAtendida() {
         return atendida;
@@ -70,6 +84,12 @@ public class Requisicao {
     public void setAtendida(boolean atendida) {
         this.atendida = atendida;
     }
+
+    public double getConta() {
+        return conta;
+    }
+
+    public void setConta(double conta) {
+        this.conta = conta;
+    }
 }
-
-
