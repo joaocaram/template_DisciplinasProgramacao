@@ -9,3 +9,5 @@ O Restaurante recebe tanto o vetor com as Mesas quanto um vetor FilaAtendimento 
 Ao final do atendimento, o Restaurante fecha a conta encerrando assim o atendimento, com isso a própria classe Restaurante armazena a Requisição que foi concluída em um vetor de historicoRequisicao e chama uma função que desocupa a Mesa, podendo assim esta receber outra Requisição.
 
 02 -![DiagramaClasses V01 - Trabalho LPM](https://github.com/DisciplinasProgramacao/lpm-projeto2024-1-javaquinho/assets/136115980/58bc95ce-deca-48d1-835b-d7676909a580)
+
+03 -![DiagramaClasses V03 - Trabalho LPM](https://github.com/DisciplinasProgramacao/lpm-projeto2024-1-javaquinho/assets/136115980/83b8c5ae-baa7-4b3f-9769-3995dd32eb10)
