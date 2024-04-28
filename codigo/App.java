@@ -3,12 +3,16 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
 
+        // Inicialização do Scanner para leitura de entrada do usuário
         Scanner scanner = new Scanner(System.in);
+        // Inicialização da instância da classe Restaurante
         Restaurante restaurante = new Restaurante();
+        // Variável para armazenar a opção escolhida pelo usuário
         int opcao;
 
-
+        // Loop principal do programa
         do {
+            // Exibe o menu de opções para o usuário
             System.out.println("\nEscolha uma opção:");
             System.out.println("1. Cadastrar cliente");
             System.out.println("2. Criar nova requisição");
@@ -18,108 +22,75 @@ public class App {
             System.out.println("6. Fechar Conta");
             System.out.println("7. Sair");
 
+            // Obtém a opção escolhida pelo usuário
             opcao = scanner.nextInt();
 
+            // Realiza a ação correspondente à opção escolhida
             switch (opcao) {
 
-                case 1:   // Cadastrar cliente.
-/* 
+                case 1:   // Cadastrar cliente ou criar requisição
+                    /* 
+                    Se o cliente não estiver cadastrado, solicita os dados necessários e cria um novo cliente.
+                    Caso contrário, avança para a criação de uma nova requisição para o cliente existente.
+                    */
+                    String nome,  telContato,  CPF;
+                    System.out.println("Digite o CPF: ");
+                    CPF = scanner.next();
+                    scanner.nextLine();
+                    if(restaurante.clienteExiste(CPF)){
+                        System.out.println("Cliente já possui cadastro.");
+                    } else{
+                        System.out.println("Digite o nome: ");
+                        nome = scanner.nextLine();
+                        System.out.println("Digite o telefone de contato: ");
+                        telContato = scanner.nextLine();
+                        restaurante.newCliente(nome, telContato, CPF);
+                    }
 
-Scanear primeiro  cpf, manda para um if e vê se o cara já existe ou não. Se não existir pede o resto dos dados do cara e cria um Cliente, 
-se já tiver o cara na lista, pula o if e já vai criar a requisição direto. Com isso funde o case 1 e case 2, o cadastro e criar requisição.
-Aí o nome do case seria "Criar/Gerar/Fazer Requisição".
-No caso os métodos para ver se o Cliente existe ou não e criar Cliente vai estar dentro da classe Restaurante. Já o construtor da 
-Requisição, eu chamo aqui no Main, depois de pedir o número de pessoas.
+                    // Verifica se o usuário deseja criar uma requisição de mesa
+                    System.out.println("Deseja requerir uma mesa? Digite 1 para sim ou 0 para não.");
+                    int continuar = scanner.nextInt();
 
- */
-
-                String nome,  telContato,  CPF;
-                System.out.println("Digite o CPF: ");
-                CPF = scanner.next();
-                scanner.nextLine();
-                if(restaurante.clienteExiste(CPF)){
-
-                    System.out.println("Cliente já possui cadastro.");
-
-                } else{
-
-                    System.out.println("Digite o nome: ");
-                    nome = scanner.nextLine();
-                    System.out.println("Digite o telefone de contato: ");
-                    telContato = scanner.nextLine();
-                    restaurante.newCliente(nome, telContato, CPF);
-
-                }
-
-                System.out.println("Deseja requerir uma mesa? Digite 1 para sim ou 0 para não.");
-                int continuar = scanner.nextInt();
-
-                if(continuar == 0){
-                    break;
-                }
-
-
+                    // Se o usuário optar por não criar uma requisição, volta ao menu principal
+                    if(continuar == 0){
+                        break;
+                    }
 
                 case 2:  
-                /* 
+                    /* 
+                    Cria uma nova requisição de mesa para um cliente existente.
+                    */
+                    String cpf; 
+                    int quantidadePessoas;
 
-                Criar requisição de um cliente já existente. Scaneia o CPF de um cliente, acha o objeto no banco de dados e
-                cria a requisição atribuindo-a a ele. Tem que scanear também a quantidade de pessoas, isso tem q ser a primeira pessoa.
+                    // Solicita o CPF do cliente
+                    System.out.println("Digite o CPF: ");
+                    cpf = scanner.next();
+                    scanner.nextLine();
+                    // Solicita a quantidade de pessoas para a requisição
+                    System.out.println("Digite a quantidade de pessoas: ");
+                    quantidadePessoas = scanner.nextInt();
+                    // Cria a requisição de mesa para o cliente informado
+                    restaurante.criarRequisicao(cpf, quantidadePessoas); 
+                    break;
 
-                */
-                
-                String cpf; 
-                int quantidadePessoas;
-
-                System.out.println("Digite o CPF: ");
-                cpf = scanner.next();
-                scanner.nextLine();
-
-                System.out.println("Digite a quantidade de pessoas: ");
-                quantidadePessoas = scanner.nextInt();
-                
-                restaurante.criarRequisicao(cpf, quantidadePessoas); 
-                
-                break;
-
-
-                case 3: // Mostrar Fila de Atendimento
-
-                restaurante.mostrarFilaAtendimento();  
-
-                break;
-
+                case 3: // Mostra a fila de atendimento
+                    restaurante.mostrarFilaAtendimento();  
+                    break;
 
                 case 4:// Mostra o menu do restaurante
-
-                Menu.mostrarMenu();
-
-                break;
+                    Menu.mostrarMenu();
+                    break;
                 
+                case 5:  // Preenche o pedido de uma Requisição/Mesa
+                    // Implementação do preenchimento do pedido
+                    break;
 
-                case 5:  /* Case para preencher o pedido de uma Requisição/Mesa */
+                case 6: // Fecha a conta de uma mesa
+                    // Implementação do fechamento de conta
+                    break;
 
-
-                break;
-
-
-                case 6: // Fechar conta
-
- /* 
-    tem que melhorar os metodos que usa pra fechar a conta, pra fazer o cálculo do pedido já com os 10% e jogar a req pro histórico
-    tem que ver também onde que vai chamar o set horaSaida da Requisição, se vai ser aqui no Main (oq pessoalmente acho que não é) ou se 
-    vai estar dentro do método fecharConta dentro de Restaurante.
- */
-                
- /*  A ser definido ainda:
-    A respeito do histórico, seria melhor duas listas com as req, a filaAtendimento e historicoAtendimento, ou fazer uma lista só
-    atendimento com um boolean se foi atendido ou não.
- */
-
-                break;
-
-                case 7: // Sair
-
+                case 7: // Sai do programa
                     System.out.println("Saindo...");
                     break;
 
@@ -128,8 +99,8 @@ Requisição, eu chamo aqui no Main, depois de pedir o número de pessoas.
                     break;
             }
 
-        } while (opcao != 7);
-        
-    scanner.close();
+        } while (opcao != 7); // Continua o loop até que o usuário escolha a opção de sair
+
+        scanner.close(); // Fecha o Scanner para liberar recursos
     }
 }
