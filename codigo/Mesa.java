@@ -79,6 +79,9 @@ public class Mesa {
         setID(contador++);
     }
 
+    public Mesa() {
+    }
+
     public void adicionaProduto(Produto produto){
         pedido.add(produto);
     }

@@ -1,7 +1,8 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TesteMesa {
+
+public class testeMesa {
     
 
     @Test
@@ -23,7 +24,7 @@ public class TesteMesa {
     public void testOcuparEDesocupar() {
         Mesa mesa = new Mesa();
         Cliente cliente = new Cliente("Roberta", "319987458536","237.267.373-56");
-        Requisicao requisicao = new Requisicao(cliente);
+        Requisicao requisicao = new Requisicao(cliente, 4);
 
         assertFalse(mesa.estaOcupada());
         assertTrue(mesa.ocupar(requisicao));
