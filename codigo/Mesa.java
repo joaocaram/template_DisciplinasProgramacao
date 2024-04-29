@@ -65,4 +65,9 @@ public class Mesa {
     this.totalConta = 0.0;
     this.pedidos.clear();
   }
+  public void adicionarTaxaServico() {
+	    double taxaServico = totalConta * 0.10;
+	    totalConta += taxaServico;
+	}
+
 }
