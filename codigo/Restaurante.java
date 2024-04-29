@@ -5,13 +5,14 @@ public class Restaurante {
     public ArrayList<Requisicao> filaAtendimento;
     private ArrayList<Requisicao> historicoAtendimento;
     private ArrayList<Cliente> listaClientes;
+    Menu menu;
 
     Restaurante() {
         setfilaAtendimento(new ArrayList<Requisicao>());
         setlistaClientes(new ArrayList<Cliente>());
         setHistoricoAtendimento(new ArrayList<Requisicao>());
         iniciaMesas();
-        iniciaMenu();
+        menu = new Menu();
     }
 
     private void setfilaAtendimento(ArrayList<Requisicao> filaAtendimento) {
@@ -42,20 +43,8 @@ public class Restaurante {
         }
     }
 
-    private void iniciaMenu() {
-        String[] itensComida = { "Moqueca de Pamito", "Falafel Assado", "Salada Primavera com Macarrão Konjac", "Escondidinho de Inhame", "Strogonoff de Cogumelos", "Caçarola de legumes"};
-        String [] itensBebida = { "Água", "Copo de Suco", "Refrigerante orgânico", "Cerveja vegana", "Taça de vinho vegano"};
-        Integer[] valorComida = { 32, 20, 25, 18, 35, 22 };
-        Integer[] valorBebida = { 3, 7, 7, 9, 18};
-    
-        Menu menu = new Menu();
-    
-        for (int i = 0; i < itensComida.length; i++) {
-            menu.adicionarProduto(itensComida[i], valorComida[i]);
-        }
-        for (int i = 0; i < itensBebida.length; i++) {
-            menu.adicionarProduto(itensBebida[i], valorBebida[i]);
-        }
+    public String getMenu(){
+        return menu.retornaMenu();
     }
     
 

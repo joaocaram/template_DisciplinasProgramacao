@@ -99,6 +99,8 @@ public class Cliente {
      * @return Uma string contendo os dados do cliente (ID, nome e telefone de contato).
      */
     public String toString(){
+
         return "ID: " + getId() +  ", Nome: " + getNome() + ", Telefone: " + getTelContato() + ", CPF: " + getCPF();
+    
     }
 }

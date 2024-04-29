@@ -79,7 +79,7 @@ public class App {
                     break;
 
                 case 4:// Mostra o menu do restaurante
-                    Menu.mostrarMenu();
+                    System.out.println(restaurante.getMenu());
                     break;
                 
                 case 5:  // Preenche o pedido de uma Requisição/Mesa
