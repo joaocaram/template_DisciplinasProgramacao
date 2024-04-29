@@ -1,81 +1,68 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Mesa {
+  private int capacidade;
+  private int idMesa;
+  private int clientesSentados;
+  private List<Pedido> pedidos;
+  private Double totalConta;
 
-    private int idMesa;
-    private int capacidade;
-    private boolean disponivel;
-    private List<Pedido> pedidos;
+  public Mesa(int idMesa, int capacidade) {
+    setIdMesa(idMesa);
+    setCapacidade(capacidade);
+    setClientesSentados(0);
+    this.pedidos = new ArrayList<>();
+    this.totalConta = 0.0;
+  }
 
-    public Mesa(int idMesa, int capacidade) {
-        this.idMesa = idMesa;
-        this.capacidade = capacidade;
-        this.disponivel = true;
-        this.pedidos = new ArrayList<>();
-    }
+  public int getCapacidade() {
+    return capacidade;
+  }
 
-    public int getIdMesa() {
-        return idMesa;
-    }
+  public void setCapacidade(int capacidade) {
+    this.capacidade = capacidade;
+  }
 
-    public int getCapacidade() {
-        return capacidade;
-    }
+  public int getIdMesa() {
+    return idMesa;
+  }
 
-    public boolean isDisponivel() {
-        return disponivel;
-    }
+  public void setIdMesa(int idMesa) {
+    this.idMesa = idMesa;
+  }
 
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
-    }
+  public int getClientesSentados() {
+    return clientesSentados;
+  }
 
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
+  public void setClientesSentados(int clientesSentados) {
+    this.clientesSentados = clientesSentados;
+  }
 
-    public void adicionarPedido(Pedido pedido) {
-        pedidos.add(pedido);
-    }
+  public List<Pedido> getPedidos() {
+    return pedidos;
+  }
 
-    public void finalizarPedido(Pedido pedido) {
-        pedidos.remove(pedido);
-    }
+  public void addPedidos(Pedido pedido) {
+    pedidos.add(pedido);
+  }
 
-    public double calcularConta() {
-        double totalPedidos = 0;
-        for (Pedido pedido : pedidos) {
-            totalPedidos += pedido.getValorTotal();
-        }
+  public Double getTotalConta() {
+    return totalConta;
+  }
 
-        double taxaServico = totalPedidos * 0.1; 
-        double valorTotal = totalPedidos + taxaServico;
+  public void addTotalConta(Double totalConta) {
+    this.totalConta += totalConta;
+  }
 
-        return valorTotal;
-    }
+  public double dividirConta() {
+    return totalConta / this.clientesSentados;
+  }
 
-    public void dividirConta() {
-        double valorTotal = calcularConta();
-        int numPessoas = 0; 
-
-        for (Pedido pedido : pedidos) {
-            numPessoas += pedido.getNumPessoas();
-        }
-
-        double valorPorPessoa = valorTotal / numPessoas;
-
-        
-        for (Pedido pedido : pedidos) {
-            pedido.setValorDividido(valorPorPessoa * pedido.getNumPessoas());
-        }
-    }
-
-    public void desocuparMesa() {
-        setDisponivel(true);
-        pedidos.clear();
-    }
+  public void pagarConta(){
+    this.clientesSentados = 0;
+    this.totalConta = 0.0;
+    this.pedidos.clear();
+  }
 }
-
-
-    
-
-
-
