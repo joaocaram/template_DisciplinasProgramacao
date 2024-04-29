@@ -2,7 +2,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 
-public class TestCliente {
+public class ClienteTest {
 
     private Cliente c;
 

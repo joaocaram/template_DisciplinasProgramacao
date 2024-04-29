@@ -2,7 +2,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
-public class TestRequisicao {
+public class RequisicaoTest {
 
     private Cliente cliente;
 

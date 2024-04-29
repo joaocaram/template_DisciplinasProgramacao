@@ -1,4 +1,5 @@
 public class Produto {
+    public int idProduto;
     private String nome;
     private double preco;
 

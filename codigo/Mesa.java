@@ -7,7 +7,7 @@ public class Mesa {
 
     private static int contador = 1;
 
-    private int id;
+    private int idMesa;
     private int capacidade;
     private boolean ocupada;
     private Requisicao requisicao;
@@ -25,8 +25,8 @@ public class Mesa {
         return capacidade;
     }
 
-    public int getId() {
-        return id;
+    public int getIdMesa() {
+        return idMesa;
     }
 
     public Requisicao getRequisicao() {
@@ -47,7 +47,7 @@ public class Mesa {
     }
 
     public void setID(int id) {
-        this.id = id;
+        this.idMesa = id;
     }
 
     /**
