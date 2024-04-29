@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TesteMesa {
     
+
     @Test
     public void testSetCapacidade() {
         Mesa mesa = new Mesa();
