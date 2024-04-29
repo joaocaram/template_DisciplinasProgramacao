@@ -1,6 +1,7 @@
 package restaurante.lpm.restaurante;
 
 import restaurante.lpm.mesa.Mesa;
+import restaurante.lpm.reserva.Reserva;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -8,19 +9,19 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class Restaurante {
-    public String[] getAlocados() {
+    public Reserva[] getAlocados() {
         return alocados;
     }
 
-    public void setAlocados(String[] alocados) {
+    public void setAlocados(Reserva[] alocados) {
         this.alocados = alocados;
     }
 
-    public String[] getFilaDeEspera() {
+    public Reserva[] getFilaDeEspera() {
         return filaDeEspera;
     }
 
-    public void setFilaDeEspera(String[] filaDeEspera) {
+    public void setFilaDeEspera(Reserva[] filaDeEspera) {
         this.filaDeEspera = filaDeEspera;
     }
 
@@ -32,8 +33,8 @@ public class Restaurante {
         this.mesas = mesas;
     }
 
-    private String[] alocados;
-    private String[] filaDeEspera;
+    private Reserva[] alocados;
+    private Reserva[] filaDeEspera;
     private Mesa[] mesas;
 
     /**
@@ -42,22 +43,23 @@ public class Restaurante {
      * @return mesa disponível (caso não haja, retorna null)
      */
     public Optional<Mesa> checarDisponibilidadeMesas(int nPessoas) {
-        Stream<Mesa> mesasDisponiveis = Arrays.stream(mesas).filter(mesa -> mesa.checarDisponibilidade() && mesa.getCapacidadePessoas() >= nPessoas);
+        Stream<Mesa> mesasDisponiveis = Arrays.stream(mesas).filter(mesa -> mesa.getDisponibilidade() && mesa.getCapacidadePessoas() >= nPessoas);
         if (mesasDisponiveis.findAny().isPresent()) {
             return mesasDisponiveis.min(Comparator.comparing(Mesa::getCapacidadePessoas));
         }
-        return null;
+        return Optional.empty();
     }
 
     /**
      * destinar o cliente para a mesa disponível
-     * @param cliente - cliente a ser alocado
+     * @param reserva - reserva a ser alocada
      * @param mesa - mesa disponível para o cliente
      * @throws Exception - mesa ocupada, ou cliente não encontrado
      */
-    public void alocarMesa(int cliente, Mesa mesa) throws Exception {
+    public void alocarMesa(Reserva reserva, Mesa mesa) throws Exception {
         try {
-            mesa.alocarCliente();
+            reserva.setIdMesa(mesa.getIdMesa());
+            mesa.setDisponibilidade(false);
         } catch (Exception e) {
             throw new Exception("Mesa já alocada para outro cliente");
         }
@@ -65,7 +67,7 @@ public class Restaurante {
 
     /**
      * desalocar o cliente da mesa anteriormente ocupada
-     * @param cliente
+     * @param cliente cliente
      * @throws Exception - mesa já desalocada, ou cliente não encontrado
      */
     public void desalocarMesa(int cliente) throws Exception {

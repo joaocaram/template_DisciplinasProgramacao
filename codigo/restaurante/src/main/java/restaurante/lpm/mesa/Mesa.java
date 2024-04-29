@@ -1,25 +1,6 @@
 package restaurante.lpm.mesa;
+
 public class Mesa {
-
-	private int capacidadePessoas;
-
-	private boolean disponibilidade;
-
-	static int mesas = 0;
-	private int IdMesa;
-
-	public boolean checarDisponibilidade() {
-		return disponibilidade;
-	}
-
-	public void alocarCliente() {
-		this.disponibilidade = false;
-
-	}
-
-	public void desalocarCliente() {
-		this.disponibilidade = true;
-	}
 
 	public int getCapacidadePessoas() {
 		return capacidadePessoas;
@@ -29,27 +10,43 @@ public class Mesa {
 		this.capacidadePessoas = capacidadePessoas;
 	}
 
-	public int getIdMesa() {
-		return this.IdMesa;
+	public boolean getDisponibilidade() {
+		return disponibilidade;
 	}
+
+	public void setDisponibilidade(boolean disponibilidade) {
+		this.disponibilidade = disponibilidade;
+	}
+
+	public int getIdMesa() {
+		return idMesa;
+	}
+
+	public void setIdMesa(int idMesa) {
+		this.idMesa = idMesa;
+	}
+
+	private int capacidadePessoas;
+	private boolean disponibilidade;
+	private int idMesa;
 
 
 	/**
-	 * @param capacidadePessoas 
-	 * @param disponibilidade   
+	 * @param capacidadePessoas capacidade de pessoas
+	 * @param disponibilidade disponibilidade da mesa
 	 */
-	public Mesa(int capacidadePessoas, boolean disponibilidade) {
+	public Mesa(int idMesa, int capacidadePessoas, boolean disponibilidade) {
 		if ( capacidadePessoas < 2 ) {
-			this.capacidadePessoas = 2;
+			this.setCapacidadePessoas(2);
 		} else if ( capacidadePessoas > 2 && capacidadePessoas <= 4) {
-			this.capacidadePessoas = 4;
+			this.setCapacidadePessoas(4);
 		} else if ( capacidadePessoas > 4 && capacidadePessoas <= 8 ) {
-			this.capacidadePessoas = 8;
+			this.setCapacidadePessoas(8);
 		} else if ( capacidadePessoas > 8 ) {
-			this.capacidadePessoas = 8;
+			this.setCapacidadePessoas(8);
 		}
-		this.disponibilidade = disponibilidade;
-		this.IdMesa = mesas++;
+		this.setDisponibilidade(disponibilidade);
+		this.setIdMesa(idMesa);
 	}
 
 }
