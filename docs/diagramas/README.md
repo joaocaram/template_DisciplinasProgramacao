@@ -4,8 +4,8 @@ Coloque aqui todas as versões do seu diagrama de classes. Cada versão deve com
 Versão 01
 <img src="/docs/diagramas/image_2024-03-24_210650288.png"></img>
 
-Versão 02
+Versão 02 \n
 <img src="/docs/diagramas/DiagramaUML.png"></img>
 
-Versao 03
+Versao 03 \n
 <img src="/docs/diagramas/Diagramsprint2.png"></img>
