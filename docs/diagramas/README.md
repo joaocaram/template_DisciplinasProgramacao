@@ -8,4 +8,4 @@ Versão 02
 <img src="/docs/diagramas/DiagramaUML.png"></img>
 
 Versao 03
-<img src="docs\diagramas\Diagramsprint2.png"></img>
+<img src="/docs/diagramas/Diagramsprint2.png"></img>
