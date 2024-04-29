@@ -5,5 +5,5 @@
 
 
    ![Diagrama UML](https://github.com/DisciplinasProgramacao/lpm-projeto2024-1-advanced-group/blob/diagramaUML/docs/diagramas/UML%20diagrams.jpeg?raw=true)
-   ![Diagrama UML](https://github.com/DisciplinasProgramacao/lpm-projeto2024-1-advanced-group/blob/diagramaUML/docs/diagramas/UML%20diagrams.png)
+   
 
