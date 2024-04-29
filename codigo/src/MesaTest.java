@@ -1,36 +1,7 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-// Implementação fake da classe Cliente
-class Cliente {
-    private int id;
-    private String nome;
-    private int numPessoas;
-
-    public Cliente(int id, String nome, int numPessoas) {
-        this.id = id;
-        this.nome = nome;
-        this.numPessoas = numPessoas;
-    }
-
-    public int getNumPessoas() {
-        return numPessoas;
-    }
-}
-
-// Implementação fake da classe Requisicao
-class Requisicao {
-    private Cliente cliente;
-
-    public Requisicao(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-}
-
+/
 
 
     @Test
