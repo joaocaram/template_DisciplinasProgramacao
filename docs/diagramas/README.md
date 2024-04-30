@@ -4,6 +4,6 @@
 * Diagrama de classes UML com a modelagem das classes 1.3 (versão corrigida começando implementação da Sprint 2)
 
 
-   ![Diagrama UML](https://github.com/DisciplinasProgramacao/lpm-projeto2024-1-advanced-group/blob/diagramaUML/docs/diagramas/UML%20diagrams.jpeg?raw=true)
+   ![Diagrama UML](https://github.com/DisciplinasProgramacao/lpm-projeto2024-1-advanced-group/blob/diagramaUML/docs/diagramas/UML%20diagrams%202.1.jpeg?raw=true)
    
 
