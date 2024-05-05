@@ -1,5 +1,7 @@
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 /**
  * A classe Requisicao representa uma requisição de reserva de mesa em um restaurante.
@@ -12,6 +14,7 @@ public class Requisicao {
     private LocalDate data; // A data da reserva
     private LocalTime horaEntrada; // A hora de entrada prevista
     private LocalTime horaSaida; // A hora de saída prevista
+    private ArrayList<Produto> pedido; // Lista de produtos solicitados na requisição
 
     /**
      * Construtor da classe Requisicao.
@@ -26,6 +29,7 @@ public class Requisicao {
         this.horaEntrada = LocalTime.now(); // Define a hora de entrada como a hora atual
         this.horaSaida = null; // A hora de saída é inicializada como nula
         this.quantidadePessoas = quantidadePessoas; // Define a quantidade de pessoas
+        this.pedido = new ArrayList<>(); // Inicializa a lista de produtos
     }
 
     /**
@@ -93,19 +97,49 @@ public class Requisicao {
     }
 
     /**
-     * Realiza a requisição de uma mesa para o número de pessoas especificado.
-     * Verifica se o número de pessoas está dentro do intervalo permitido (1 a 8).
-     * Caso contrário, exibe uma mensagem de erro.
-     * @param quantidadePessoas A quantidade de pessoas na reserva.
+     * Adiciona um produto ao pedido da requisição.
+     * @param produto O produto a ser adicionado ao pedido.
      */
-    public void requerirMesa(int quantidadePessoas) {
-        if (quantidadePessoas > 0 && quantidadePessoas <= 8) {
-            this.quantidadePessoas = quantidadePessoas;
+    public void adicionarProduto(Produto produto) {
+        pedido.add(produto);
+    }
+
+    /**
+     * Calcula o tempo de permanência do cliente na mesa.
+     * @return O tempo de permanência do cliente na mesa.
+     */
+    public Duration calcularTempoPermanencia() {
+        LocalTime horaAtual = LocalTime.now();
+        return Duration.between(horaEntrada, horaAtual);
+    }
+
+    /**
+     * Atualiza a quantidade de pessoas na reserva.
+     * @param novaQuantidade A nova quantidade de pessoas na reserva.
+     * @return Verdadeiro se a atualização for bem-sucedida, falso caso contrário.
+     */
+    public boolean atualizarQuantidadePessoas(int novaQuantidade) {
+        if (novaQuantidade > 0 && novaQuantidade <= 8) {
+            this.quantidadePessoas = novaQuantidade;
+            return true;
         } else {
-            System.out.println("Quantidade de pessoas inválida.");
+            return false;
         }
     }
-    public String toString(){
-        return this.horaEntrada + " - " + this.cliente;
+
+    /**
+     * Verifica a disponibilidade de mesas para a quantidade de pessoas especificada.
+     * @param capacidadeMesa A capacidade desejada da mesa.
+     * @param mesasDisponiveis Lista das mesas disponíveis no restaurante.
+     * @return Verdadeiro se houver uma mesa disponível, falso caso contrário.
+     */
+    public boolean verificarDisponibilidadeMesa(int capacidadeMesa, ArrayList<Mesa> mesasDisponiveis) {
+        // Percorre a lista de mesas disponíveis para verificar se alguma tem a capacidade desejada e está livre
+        for (Mesa mesa : mesasDisponiveis) {
+            if (!mesa.estaOcupada() && mesa.getCapacidade() >= capacidadeMesa) {
+                return true; // Mesa disponível encontrada
+            }
+        }
+        return false; // Nenhuma mesa disponível encontrada
     }
 }

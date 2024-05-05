@@ -1,4 +1,6 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -7,8 +9,8 @@ public class RequisicaoTest {
     private Cliente cliente;
 
     @BeforeEach
-    public void setup(){
-        cliente = new Cliente ("Ciclano", "987654321", "987.654.321-00");
+    public void setup() {
+        cliente = new Cliente("Ciclano", "987654321", "987.654.321-00");
     }
 
     @Test
@@ -18,12 +20,35 @@ public class RequisicaoTest {
     }
 
     @Test
-    public void testRequerirMesa() {
+    public void testAtualizarQuantidadePessoas() {
         Requisicao requisicao = new Requisicao(cliente, 3);
-        assertEquals(3, requisicao.getQuantidadePessoas());
-        requisicao.requerirMesa(4);
-        assertEquals(3, requisicao.getQuantidadePessoas());
-        requisicao.requerirMesa(2);
-        assertEquals(2, requisicao.getQuantidadePessoas());
+
+        assertTrue(requisicao.atualizarQuantidadePessoas(5));
+        assertEquals(5, requisicao.getQuantidadePessoas());
+
+        assertFalse(requisicao.atualizarQuantidadePessoas(10));
+        assertEquals(5, requisicao.getQuantidadePessoas());
+    }
+
+    @Test
+    public void testVerificarDisponibilidadeMesa() {
+        Requisicao requisicao = new Requisicao(cliente, 4);
+        Mesa mesaDisponivel = new Mesa(4);
+        Mesa mesaOcupada = new Mesa(4);
+        mesaOcupada.ocupar(requisicao);
+
+        assertTrue(requisicao.verificarDisponibilidadeMesa(4, mesaDisponivel));
+
+        assertFalse(requisicao.verificarDisponibilidadeMesa(4, mesaOcupada));
+    }
+
+    @Test
+    public void testAdicionarProduto() {
+        Requisicao requisicao = new Requisicao(cliente, 3);
+        Produto produto = new Produto("Pizza", 20.0);
+
+        requisicao.adicionarProduto(produto);
+        assertEquals(1, requisicao.getPedido().size());
+        assertEquals(produto, requisicao.getPedido().get(0));
     }
 }
