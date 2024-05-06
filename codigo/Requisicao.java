@@ -1,70 +1,64 @@
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Requisicao {
-    private Cliente cliente;
-    private LocalDate data;
-    private LocalTime horaEntrada;
-    private LocalTime horaSaida;
-    private Mesa mesa;
-    private int numAcompanhantes;
-    private boolean encerrada
 
-    public Requisicao(Cliente cliente, LocalDate data, LocalTime horaEntrada, int numAcompanhantes) {
-        this.cliente = cliente;
-        this.data = data;
-        this.horaEntrada = horaEntrada;
-        this.numAcompanhantes = numAcompanhantes;
-        this.encerrada = false;
-    }
+	private Cliente cliente;
+	private Mesa mesa;
+	private int quantPessoas;
+	private LocalDateTime entrada;
+	private LocalDateTime saida;
+	private boolean encerrada;
 
-     public Mesa encerrar(LocalTime horaSaida) {
-        this.horaSaida = horaSaida;
-        this.encerrada = true;
-        return this.mesa;
-    }
+	public Requisicao(int quantPessoas, Cliente cliente) {
+		this.quantPessoas = 1;
+		if(quantPessoas > 1 )
+			this.quantPessoas = quantPessoas;
+		this.cliente = cliente;
+		entrada = saida = null;
+		mesa = null;
+		encerrada = false;
+	}
 
-    public void alocarMesa(Mesa mesa) {
-        this.mesa = mesa;
-    }
+	public Mesa encerrar() {
+		saida = LocalDateTime.now();
+		mesa.desocupar();
+		encerrada = true;
+		return mesa;
+	}
 
-    public boolean estaEncerrada() {
-        return this.encerrada;
-    }
+	public void alocarMesa(Mesa mesa) {
+		if(mesa.estahLiberada(quantPessoas)){
+			this.mesa = mesa;
+			entrada = LocalDateTime.now();
+			this.mesa.ocupar();
+		}
+	}
 
-    public boolean ehDaMesa(int idMesa) {
-        return this.mesa != null && this.mesa.getId() == idMesa;
-    }
+	public boolean estahEncerrada(){
+		return encerrada;
+	}
 
-    public int quantPessoas() {
-        return this.numAcompanhantes;
-    }
+	public boolean ehDaMesa(int idMesa){
+		return idMesa == mesa.getIdMesa();
+	}
 
-    public Cliente getCliente() {
-        return cliente;
-    }
+	public int quantPessoas(){
+		return quantPessoas;
+	}
 
-    public LocalDate getData() {
-        return data;
-    }
-
-    public LocalTime getHoraEntrada() {
-        return horaEntrada;
-    }
-
-    public LocalTime getHoraSaida() {
-        return horaSaida;
-    }
-
-    public Mesa getMesa() {
-        return mesa;
-    }
-
-    public int getNumAcompanhantes() {
-        return numAcompanhantes;
-    }
-
-    public boolean isEncerrada() {
-        return encerrada;
-    }
+	public String toString(){
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		StringBuilder stringReq = new StringBuilder(cliente.toString());
+		if(mesa!=null){
+			stringReq.append("\n"+mesa.toString()+"\n");
+			stringReq.append("Entrada em "+ formato.format(entrada)+"\n");
+			if(saida!=null)
+				stringReq.append("Saída em "+formato.format(saida)+"\n");
+		}
+		else{
+			stringReq.append(" Em espera.");
+		}
+		return stringReq.toString();
+	}
 }
