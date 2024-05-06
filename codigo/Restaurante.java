@@ -51,12 +51,14 @@ public class Restaurante {
     /**
      * Método para alocar mesa com a primeira requisição disponível
      */
-    public void alocarMesa() {
-        Requisicao requisicao;
+    public Requisicao alocarMesa() {
+        Requisicao requisicao = null;
         boolean alocado = false;
         int indice = 0;
 
-        while (!alocado) {
+        // for 
+
+        while (!alocado && indice < filaAtendimento.size()) {
             requisicao = filaAtendimento.get(indice);
             for (Mesa mesa : mesas) {
                     if (mesa.estahLiberada(requisicao.quantPessoas())){
@@ -66,9 +68,15 @@ public class Restaurante {
                         alocado = true;
                     }
             }
-        }
-        
             indice++;
+        }
+        if (indice == filaAtendimento.size()){
+            requisicao = null;
+        }
+
+        return requisicao;
+        
+            
     }
     
 
