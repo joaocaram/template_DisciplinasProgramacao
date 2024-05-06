@@ -59,18 +59,18 @@ public class Restaurante {
         while (!alocado) {
             requisicao = filaAtendimento.get(indice);
             for (Mesa mesa : mesas) {
-                if (mesa.getCapacidade() <= requisicao.getQuantidadePessoas()
-                        && !mesa.estaOcupada()) {
-                    mesa.ocupar(requisicao);
-                    int indiceReq = indexListaRequisicao(requisicao);
-                    removerRequisicaoFila(indiceReq);
-                    alocado = true;
-                }
+                    if (mesa.estahLiberada(requisicao.quantPessoas())){
+                        requisicao.alocarMesa(mesa);
+                        int indiceReq = indexListaRequisicao(requisicao);
+                        removerRequisicaoFila(indiceReq);
+                        alocado = true;
+                    }
             }
-
-            indice++;
         }
+        
+            indice++;
     }
+    
 
     
 
