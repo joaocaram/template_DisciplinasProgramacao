@@ -2,6 +2,7 @@ package restaurante.lpm.restaurante;
 
 import restaurante.lpm.mesa.Mesa;
 import restaurante.lpm.reserva.Reserva;
+import restaurante.lpm.cardapio.Cardapio;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -9,6 +10,18 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class Restaurante {
+    private Reserva[] alocados;
+    private Reserva[] filaDeEspera;
+    private Mesa[] mesas;
+    private Cardapio cardapio;
+
+    public Restaurante() {
+        this.cardapio = new Cardapio();
+        this.alocados = new Reserva[0];
+        this.filaDeEspera = new Reserva[0];
+        this.mesas = new Mesa[0];
+    }
+
     public Reserva[] getAlocados() {
         return alocados;
     }
@@ -33,15 +46,14 @@ public class Restaurante {
         this.mesas = mesas;
     }
 
-    private Reserva[] alocados;
-    private Reserva[] filaDeEspera;
-    private Mesa[] mesas;
+    public Cardapio getCardapio() {
+        return cardapio;
+    }
 
-    /**
-     * verificar se há alguma mesa disponível para atender o número de pessoas
-     * @param nPessoas - número de pessoas da reserva
-     * @return mesa disponível (caso não haja, retorna null)
-     */
+    public void setCardapio(Cardapio cardapio) {
+        this.cardapio = cardapio;
+    }
+
     public Optional<Mesa> checarDisponibilidadeMesas(int nPessoas) {
         Stream<Mesa> mesasDisponiveis = Arrays.stream(mesas).filter(mesa -> mesa.getDisponibilidade() && mesa.getCapacidadePessoas() >= nPessoas);
         if (mesasDisponiveis.findAny().isPresent()) {
@@ -50,12 +62,6 @@ public class Restaurante {
         return Optional.empty();
     }
 
-    /**
-     * destinar o cliente para a mesa disponível
-     * @param reserva - reserva a ser alocada
-     * @param mesa - mesa disponível para o cliente
-     * @throws Exception - mesa ocupada, ou cliente não encontrado
-     */
     public void alocarMesa(Reserva reserva, Mesa mesa) throws Exception {
         try {
             reserva.setIdMesa(mesa.getIdMesa());
@@ -65,12 +71,12 @@ public class Restaurante {
         }
     }
 
-    /**
-     * desalocar o cliente da mesa anteriormente ocupada
-     * @param cliente cliente
-     * @throws Exception - mesa já desalocada, ou cliente não encontrado
-     */
     public void desalocarMesa(int cliente) throws Exception {
         throw new Exception("method not implemented yet");
     }
+
+    public void exibirCardapio() {
+        this.cardapio.exibirCardapio();
+    }
 }
+
