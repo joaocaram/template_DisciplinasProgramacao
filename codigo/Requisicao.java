@@ -1,145 +1,109 @@
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-/**
- * A classe Requisicao representa uma requisição de reserva de mesa em um restaurante.
- * Cada requisição é associada a um cliente e inclui informações sobre a data, hora de entrada,
- * hora de saída e quantidade de pessoas.
- */
 public class Requisicao {
-    private Cliente cliente; // O cliente associado à requisição
-    private int quantidadePessoas; // A quantidade de pessoas na reserva
-    private LocalDate data; // A data da reserva
-    private LocalTime horaEntrada; // A hora de entrada prevista
-    private LocalTime horaSaida; // A hora de saída prevista
-    private ArrayList<Produto> pedido; // Lista de produtos solicitados na requisição
+
+    // Variáveis de instância para representar uma requisição
+    private Cliente cliente; // Cliente associado à requisição
+    private Mesa mesa; // Mesa associada à requisição
+    private int quantPessoas; // Quantidade de pessoas na requisição
+    private LocalDateTime entrada; // Data e hora de entrada na mesa
+    private LocalDateTime saida; // Data e hora de saída da mesa
+    private boolean encerrada; // Indica se a requisição foi encerrada
 
     /**
      * Construtor da classe Requisicao.
-     * Inicializa um objeto Requisicao associado ao cliente fornecido,
-     * com a data e hora atuais e sem hora de saída definida.
-     * @param cliente O cliente que está fazendo a requisição.
-     * @param quantidadePessoas A quantidade de pessoas na reserva.
+     * @param cliente O cliente associado à requisição.
+     * @param quantPessoas A quantidade de pessoas na requisição.
      */
-    public Requisicao(Cliente cliente, int quantidadePessoas) {
+    public Requisicao(Cliente cliente, int quantPessoas) {
+        // Define a quantidade de pessoas como pelo menos 1, se a quantidade fornecida for menor que 1
+        this.quantPessoas = Math.max(1, quantPessoas);
         this.cliente = cliente;
-        this.data = LocalDate.now(); // Define a data como a data atual
-        this.horaEntrada = LocalTime.now(); // Define a hora de entrada como a hora atual
-        this.horaSaida = null; // A hora de saída é inicializada como nula
-        this.quantidadePessoas = quantidadePessoas; // Define a quantidade de pessoas
-        this.pedido = new ArrayList<>(); // Inicializa a lista de produtos
+        // Inicializa as variáveis de data/hora e mesa como nulas
+        entrada = saida = null;
+        mesa = null;
+        // Inicializa a requisição como não encerrada
+        encerrada = false;
     }
 
     /**
-     * Obtém a hora de entrada prevista para a reserva.
-     * @return A hora de entrada prevista.
+     * Encerra a requisição, desocupando a mesa e registrando a data/hora de saída.
+     * @return A mesa que foi desocupada.
      */
-    public LocalTime getHoraEntrada() {
-        return horaEntrada;
+    public Mesa encerrar() {
+        // Registra a data/hora de saída como o momento atual
+        saida = LocalDateTime.now();
+        // Desocupa a mesa associada a requisição
+        mesa.desocupar();
+        // Marca a requisição como encerrada
+        encerrada = true;
+        // Retorna a mesa que foi desocupada
+        return mesa;
     }
 
     /**
-     * Obtém a data da reserva.
-     * @return A data da reserva.
+     * Aloca uma mesa para a requisição, se disponível.
+     * @param mesa A mesa a ser alocada.
      */
-    public LocalDate getData() {
-        return data;
+    public void alocarMesa(Mesa mesa) {
+        // Verifica se a mesa está disponível para a quantidade de pessoas na requisição
+        if (mesa.estahLiberada(quantPessoas)) {
+            // Se sim, associa a mesa à requisição
+            this.mesa = mesa;
+            // Registra a data/hora de entrada como o momento atual
+            entrada = LocalDateTime.now();
+            // Ocupa a mesa associada à requisição
+            this.mesa.ocupar();
+        }
     }
 
     /**
-     * Obtém a hora de saída prevista para a reserva.
-     * @return A hora de saída prevista.
+     * Verifica se a requisição está encerrada.
+     * @return true se a requisição está encerrada, false caso contrário.
      */
-    public LocalTime getHoraSaida() {
-        return horaSaida;
+    public boolean estahEncerrada() {
+        return encerrada;
     }
 
     /**
-     * Obtém o cliente associado à requisição.
-     * @return O cliente associado à requisição.
+     * Verifica se a requisição é associada à mesa com o ID especificado.
+     * @param idMesa O ID da mesa a ser verificada.
+     * @return true se a requisição é associada à mesa com o ID especificado, false caso contrário.
      */
-    public Cliente getCliente() {
-        return cliente;
+    public boolean ehDaMesa(int idMesa) {
+        // Verifica se a mesa associada à requisição tem o ID especificado
+        return mesa != null && idMesa == mesa.getIdMesa();
     }
 
     /**
-     * Obtém a quantidade de pessoas na reserva.
-     * @return A quantidade de pessoas na reserva.
+     * Obtém a quantidade de pessoas na requisição.
+     * @return A quantidade de pessoas na requisição.
      */
-    public int getQuantidadePessoas() {
-        return quantidadePessoas;
+    public int quantPessoas() {
+        return quantPessoas;
     }
 
     /**
-     * Define a data da reserva.
-     * @param data A nova data da reserva.
+     * Retorna uma representação em formato de string da requisição.
+     * @return Uma string representando a requisição.
      */
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
-
-    /**
-     * Define a hora de entrada prevista para a reserva.
-     * @param horaEntrada A nova hora de entrada prevista.
-     */
-    public void setHoraEntrada(LocalTime horaEntrada) {
-        this.horaEntrada = horaEntrada;
-    }
-
-    /**
-     * Define a hora de saída prevista para a reserva.
-     * @param horaSaida A nova hora de saída prevista.
-     */
-    public void setHoraSaida(LocalTime horaSaida) {
-        this.horaSaida = horaSaida;
-    }
-
-    /**
-     * Adiciona um produto ao pedido da requisição.
-     * @param produto O produto a ser adicionado ao pedido.
-     */
-    public void adicionarProduto(Produto produto) {
-        pedido.add(produto);
-    }
-
-    /**
-     * Calcula o tempo de permanência do cliente na mesa.
-     * @return O tempo de permanência do cliente na mesa.
-     */
-    public Duration calcularTempoPermanencia() {
-        LocalTime horaAtual = LocalTime.now();
-        return Duration.between(horaEntrada, horaAtual);
-    }
-
-    /**
-     * Atualiza a quantidade de pessoas na reserva.
-     * @param novaQuantidade A nova quantidade de pessoas na reserva.
-     * @return Verdadeiro se a atualização for bem-sucedida, falso caso contrário.
-     */
-    public boolean atualizarQuantidadePessoas(int novaQuantidade) {
-        if (novaQuantidade > 0 && novaQuantidade <= 8) {
-            this.quantidadePessoas = novaQuantidade;
-            return true;
+    public String toString() {
+        // Formato para exibir datas/horas
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        // Construtor de string para montar a representação da requisição
+        StringBuilder stringReq = new StringBuilder(cliente.toString());
+        if (mesa != null) {
+            // Se a requisição estiver associada a uma mesa, adiciona informações sobre a mesa, entrada e saída
+            stringReq.append("\n").append(mesa.toString()).append("\n");
+            stringReq.append("Entrada em ").append(formato.format(entrada)).append("\n");
+            if (saida != null)
+                stringReq.append("Saída em ").append(formato.format(saida)).append("\n");
         } else {
-            return false;
+            // Se a requisição estiver em espera (sem mesa associada), adiciona essa informação
+            stringReq.append(" Em espera.");
         }
-    }
-
-    /**
-     * Verifica a disponibilidade de mesas para a quantidade de pessoas especificada.
-     * @param capacidadeMesa A capacidade desejada da mesa.
-     * @param mesasDisponiveis Lista das mesas disponíveis no restaurante.
-     * @return Verdadeiro se houver uma mesa disponível, falso caso contrário.
-     */
-    public boolean verificarDisponibilidadeMesa(int capacidadeMesa, ArrayList<Mesa> mesasDisponiveis) {
-        // Percorre a lista de mesas disponíveis para verificar se alguma tem a capacidade desejada e está livre
-        for (Mesa mesa : mesasDisponiveis) {
-            if (!mesa.estaOcupada() && mesa.getCapacidade() >= capacidadeMesa) {
-                return true; // Mesa disponível encontrada
-            }
-        }
-        return false; // Nenhuma mesa disponível encontrada
+        // Retorna a string representando a requisição
+        return stringReq.toString();
     }
 }
