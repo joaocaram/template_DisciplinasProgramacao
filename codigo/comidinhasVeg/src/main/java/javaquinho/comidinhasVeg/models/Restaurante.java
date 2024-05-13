@@ -1,3 +1,4 @@
+package javaquinho.comidinhasVeg.models;
 import java.util.ArrayList;
 
 public class Restaurante {
@@ -7,7 +8,7 @@ public class Restaurante {
     private ArrayList<Cliente> listaClientes;
     Menu menu;
 
-    Restaurante() {
+    public Restaurante() {
         setfilaAtendimento(new ArrayList<Requisicao>());
         setlistaClientes(new ArrayList<Cliente>());
         setHistoricoAtendimento(new ArrayList<Requisicao>());

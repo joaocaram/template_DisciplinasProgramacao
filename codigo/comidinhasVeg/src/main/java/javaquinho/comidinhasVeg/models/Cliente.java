@@ -1,3 +1,4 @@
+package javaquinho.comidinhasVeg.models;
 /**
  * A classe Cliente representa um cliente do sistema de restaurante.
  */

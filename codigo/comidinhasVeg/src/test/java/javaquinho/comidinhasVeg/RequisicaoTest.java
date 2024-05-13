@@ -1,5 +1,6 @@
-import static org.junit.Assert.*;
-import org.junit.Test;
+package javaquinho.comidinhasVeg;
+
+
 import java.time.LocalDateTime;
 
 public class RequisicaoTest {

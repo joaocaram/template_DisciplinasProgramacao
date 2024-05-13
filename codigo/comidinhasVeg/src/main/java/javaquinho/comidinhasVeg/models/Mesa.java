@@ -1,4 +1,4 @@
-
+package javaquinho.comidinhasVeg.models;
 
 public class Mesa {
 

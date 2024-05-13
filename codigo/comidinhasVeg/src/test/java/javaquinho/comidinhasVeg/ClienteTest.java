@@ -1,12 +1,20 @@
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import org.junit.Before;
+package javaquinho.comidinhasVeg;
+
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javaquinho.comidinhasVeg.models.Cliente;
+
+
 
 public class ClienteTest {
 
     private Cliente c;
 
-    @Before
+    @BeforeEach
     public void setup(){
         c = new Cliente("João", "31988776655", "23726737356");
     }

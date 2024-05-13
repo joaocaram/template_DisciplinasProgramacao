@@ -1,3 +1,4 @@
+package javaquinho.comidinhasVeg.models;
 public class Produto {
 
     private static int contador = 1;

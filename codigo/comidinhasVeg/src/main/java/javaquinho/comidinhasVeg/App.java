@@ -1,4 +1,8 @@
+package javaquinho.comidinhasVeg;
+
 import java.util.Scanner;
+
+import javaquinho.comidinhasVeg.models.Restaurante;
 
 public class App {
     public static void main(String[] args) {

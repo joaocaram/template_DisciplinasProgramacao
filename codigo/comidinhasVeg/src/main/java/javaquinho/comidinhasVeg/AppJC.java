@@ -1,4 +1,9 @@
+package javaquinho.comidinhasVeg;
 import java.util.Scanner;
+
+import javaquinho.comidinhasVeg.models.Cliente;
+import javaquinho.comidinhasVeg.models.Requisicao;
+import javaquinho.comidinhasVeg.models.Restaurante;
 
 public class AppJC {
     static Scanner teclado;

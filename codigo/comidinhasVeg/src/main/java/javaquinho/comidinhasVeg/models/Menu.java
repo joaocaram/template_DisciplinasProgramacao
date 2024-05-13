@@ -1,3 +1,4 @@
+package javaquinho.comidinhasVeg.models;
 import java.util.ArrayList;
 
 public class Menu {
