@@ -39,13 +39,13 @@ public class AppJC {
 
     static void mostrarFila(){
         cabecalho();
-        System.out.println(restaurante.filaDeEspera());
+        restaurante.filaDeEspera();
         pausa();
     }
 
     static void exibirMesas() {
         cabecalho();
-        System.out.println(restaurante.statusMesas());
+        restaurante.statusMesas();
         pausa();
     }
     

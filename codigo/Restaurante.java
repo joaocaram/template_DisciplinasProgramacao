@@ -62,7 +62,7 @@ public class Restaurante {
     /**
      * Método para alocar mesa com a primeira requisição disponível
      */
-    public Requisicao alocarMesa() {
+    public Requisicao processarFila() {
         Requisicao requisicao = null;
         boolean alocado = false;
         int indice = 0;
@@ -188,6 +188,17 @@ public class Restaurante {
         return;
     }
 
+    public Cliente localizarCliente(int idCliente){
+        Cliente cliente = null;
+        for (Cliente clienteL : listaClientes) {
+            if (clienteL.getId() == idCliente) {
+                return clienteL;
+            }
+        }
+
+        return cliente;
+    }
+
     /**
      * Retorna a posição do cliente na lista de clientes do restaurante
      * 
@@ -204,6 +215,10 @@ public class Restaurante {
         }
 
         return index;
+    }
+
+    public void addCliente(Cliente cliente){
+        listaClientes.add(cliente);
     }
 
     /**
@@ -230,5 +245,17 @@ public class Restaurante {
         }
         requisicao.encerrar();
         return requisicao;
+    }
+
+    public void statusMesas(){
+        for (Mesa mesa : mesas){
+            mesa.toString();
+        }
+    }
+
+    public void filaDeEspera(){
+        for (Requisicao requisicao : filaAtendimento){
+            requisicao.toString();
+        }
     }
 }
