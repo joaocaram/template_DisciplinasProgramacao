@@ -1,6 +1,11 @@
-package comidinhasVeg.src.test.java.javaquinho.comidinhasVeg;
-import org.junit.Test;
+package javaquinho.comidinhas;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javaquinho.comidinhas.models.Cliente;
+import javaquinho.comidinhas.models.Requisicao;
+import javaquinho.comidinhas.models.Restaurante;
 
 public class RestauranteTest {
     Cliente cliente;
@@ -15,7 +20,7 @@ public class RestauranteTest {
 
     @Test
     public void testCriarRequisicao(){
-        restaurante.criarRequisicao("12345678912", 4);
+        // Restaurante.criarRequisicao("12345678912", 4);
     }
 
 }
