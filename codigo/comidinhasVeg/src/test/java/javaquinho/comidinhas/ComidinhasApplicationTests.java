@@ -1,10 +1,10 @@
-package javaquinho.comidinhasVeg;
+package javaquinho.comidinhas;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ComidinhasVegApplicationTests {
+class comidinhasApplicationTests {
 
 	@Test
 	void contextLoads() {

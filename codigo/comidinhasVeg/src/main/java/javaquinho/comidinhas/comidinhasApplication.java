@@ -1,13 +1,13 @@
-package javaquinho.comidinhasVeg;
+package javaquinho.comidinhas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ComidinhasVegApplication {
+public class comidinhasApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ComidinhasVegApplication.class, args);
+		SpringApplication.run(comidinhasApplication.class, args);
 	}
 
 }

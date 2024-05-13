@@ -1,4 +1,4 @@
-package javaquinho.comidinhasVeg;
+package javaquinho.comidinhas;
 
 
 import java.time.LocalDateTime;

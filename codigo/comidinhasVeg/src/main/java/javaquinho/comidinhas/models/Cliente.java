@@ -1,7 +1,10 @@
-package javaquinho.comidinhasVeg.models;
+package javaquinho.comidinhas.models;
+
+
 /**
  * A classe Cliente representa um cliente do sistema de restaurante.
  */
+
 public class Cliente {
     
     private static int contador = 1;

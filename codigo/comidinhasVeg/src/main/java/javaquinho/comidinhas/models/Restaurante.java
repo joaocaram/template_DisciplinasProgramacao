@@ -1,5 +1,6 @@
-package javaquinho.comidinhasVeg.models;
+package javaquinho.comidinhas.models;
 import java.util.ArrayList;
+
 
 public class Restaurante {
     private ArrayList<Mesa> mesas;
