@@ -51,26 +51,34 @@ public class Restaurante {
     /**
      * Método para alocar mesa com a primeira requisição disponível
      */
-    public void alocarMesa() {
-        Requisicao requisicao;
+    public Requisicao alocarMesa() {
+        Requisicao requisicao = null;
         boolean alocado = false;
         int indice = 0;
 
-        while (!alocado) {
+        // for 
+
+        while (!alocado && indice < filaAtendimento.size()) {
             requisicao = filaAtendimento.get(indice);
             for (Mesa mesa : mesas) {
-                if (mesa.getCapacidade() <= requisicao.getQuantidadePessoas()
-                        && !mesa.estaOcupada()) {
-                    mesa.ocupar(requisicao);
-                    int indiceReq = indexListaRequisicao(requisicao);
-                    removerRequisicaoFila(indiceReq);
-                    alocado = true;
-                }
+                    if (mesa.estahLiberada(requisicao.quantPessoas())){
+                        requisicao.alocarMesa(mesa);
+                        int indiceReq = indexListaRequisicao(requisicao);
+                        removerRequisicaoFila(indiceReq);
+                        alocado = true;
+                    }
             }
-
             indice++;
         }
+        if (indice == filaAtendimento.size()){
+            requisicao = null;
+        }
+
+        return requisicao;
+        
+            
     }
+    
 
     
 

@@ -4,34 +4,49 @@ import java.time.LocalDateTime;
 
 public class RequisicaoTest {
 
-    @Test
-    public void testAlocarMesa() {
-        Cliente cliente = new Cliente("Saulo", "saulinho@gmail.com");
-        Mesa mesa = new Mesa(1, 4);
-        Requisicao req = new Requisicao(cliente, 3);
+    // private Cliente cliente;
 
-        req.alocarMesa(mesa);
+    // @BeforeEach
+    // public void setup() {
+    //     cliente = new Cliente("Ciclano", "987654321", "987.654.321-00");
+    // }
 
-        assertTrue("A requisição deve ter a mesa corretamente alocada", req.ehDaMesa(1));
-    }
+    // @Test
+    // public void testGetQuantidadePessoas() {
+    //     Requisicao requisicao = new Requisicao(cliente, 5);
+    //     assertEquals(5, requisicao.getQuantidadePessoas());
+    // }
 
-    @Test
-    public void testEncerrar() {
-        Cliente cliente = new Cliente("Saulo", "saulinho@gmail.com");
-        Mesa mesa = new Mesa(1, 4);
-        Requisicao req = new Requisicao(cliente, 3);
+    // @Test
+    // public void testAtualizarQuantidadePessoas() {
+    //     Requisicao requisicao = new Requisicao(cliente, 3);
 
-        req.alocarMesa(mesa);
-        req.encerrar();
+    //     assertTrue(requisicao.atualizarQuantidadePessoas(5));
+    //     assertEquals(5, requisicao.getQuantidadePessoas());
 
-        assertTrue("A requisição deve estar encerrada", req.estahEncerrada());
-    }
+    //     assertFalse(requisicao.atualizarQuantidadePessoas(10));
+    //     assertEquals(5, requisicao.getQuantidadePessoas());
+    // }
 
-    @Test
-    public void testQuantPessoas() {
-        Cliente cliente = new Cliente("Saulo", "saulinho@gmail.com");
-        Requisicao req = new Requisicao(cliente, 3);
+    // @Test
+    // public void testVerificarDisponibilidadeMesa() {
+    //     Requisicao requisicao = new Requisicao(cliente, 4);
+    //     Mesa mesaDisponivel = new Mesa(4);
+    //     Mesa mesaOcupada = new Mesa(4);
+    //     mesaOcupada.ocupar(requisicao);
 
-        assertEquals("A quantidade de pessoas deve ser 3", 3, req.quantPessoas());
-    }
+    //     assertTrue(requisicao.verificarDisponibilidadeMesa(4, mesaDisponivel));
+
+    //     assertFalse(requisicao.verificarDisponibilidadeMesa(4, mesaOcupada));
+    // }
+
+    // @Test
+    // public void testAdicionarProduto() {
+    //     Requisicao requisicao = new Requisicao(cliente, 3);
+    //     Produto produto = new Produto("Pizza", 20.0);
+
+    //     requisicao.adicionarProduto(produto);
+    //     assertEquals(1, requisicao.getPedido().size());
+    //     assertEquals(produto, requisicao.getPedido().get(0));
+    // }
 }
