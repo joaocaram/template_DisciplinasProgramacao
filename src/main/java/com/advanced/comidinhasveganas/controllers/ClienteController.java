@@ -1,10 +1,10 @@
-package com.lpm.controllers;
+package com.advanced.comidinhasveganas.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.lpm.models.Cliente;
-import com.lpm.services.ClienteServices;
+import com.advanced.comidinhasveganas.models.Cliente;
+import com.advanced.comidinhasveganas.services.ClienteServices;
 
 import jakarta.validation.Valid;
 
