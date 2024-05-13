@@ -4,8 +4,8 @@ package com.advanced.comidinhasveganas.controllers;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.lpm.models.Requisicao;
-import com.lpm.services.RequisicaoServices;
+import com.advanced.comidinhasveganas.models.Requisicao;
+import com.advanced.comidinhasveganas.services.RequisicaoServices;
 
 import jakarta.validation.Valid;
 

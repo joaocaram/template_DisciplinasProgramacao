@@ -1,9 +1,11 @@
+package com.advanced.comidinhasveganas.controllers;
+
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.lpm.models.Mesa;
-import com.lpm.services.MesaServices;
+import com.advanced.comidinhasveganas.models.Mesa;
+import com.advanced.comidinhasveganas.services.MesaServices;
 
 import jakarta.validation.Valid;
 
