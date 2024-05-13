@@ -64,10 +64,12 @@ public class AppJC {
     }
 
     static Cliente cadastrarNovoCliente() {
-        String nome;
+        String nome, telContato, CPF;
         System.out.print("Nome do cliente: ");
         nome = teclado.nextLine();
-        Cliente novo = new Cliente(nome);
+        telContato = teclado.nextLine();
+        CPF = teclado.nextLine();
+        Cliente novo = new Cliente(nome, telContato, CPF);
         System.out.println("Cliente cadastrado: " + novo);
         pausa();
         return novo;
@@ -78,8 +80,8 @@ public class AppJC {
         cabecalho();
         System.out.print("Para quantas pessoas será a mesa? ");
         quantasPessoas = Integer.parseInt(teclado.nextLine());
-        Requisicao novaRequisicao = new Requisicao(quantasPessoas, cliente);
-        restaurante.registrarRequisicao(novaRequisicao);
+        Requisicao novaRequisicao = new Requisicao(cliente, quantasPessoas);
+        restaurante.adicionarRequisicaoFila(novaRequisicao);
         novaRequisicao = processarFila();
         if(novaRequisicao!=null){
             System.out.println(novaRequisicao);

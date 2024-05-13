@@ -27,6 +27,17 @@ public class Restaurante {
         this.listaClientes = listaClientes;
     }
 
+    private Mesa getMesa(int idMesa){
+        Mesa mesaRetorno = null;
+
+        for (Mesa mesa : mesas){
+            if(mesa.getIdMesa() == idMesa){
+                mesaRetorno = mesa;
+            }
+        }
+        return mesaRetorno;
+    }
+
     private void iniciaMesas() {
         int[] capacidades = { 4, 6, 8 };
         int[] quant = { 4, 4, 2 };
@@ -208,5 +219,16 @@ public class Restaurante {
         for(int i = 0; i < filaAtendimento.size() ; i++ ){
             System.out.println(filaAtendimento.get(i));
         }
+    }
+
+    public Requisicao encerrarAtendimento(int idMesa){
+        Requisicao requisicao = null;
+        for (Requisicao requisicaoFila : filaAtendimento){
+            if (requisicaoFila.ehDaMesa(idMesa)){
+                requisicao = requisicaoFila;
+            }
+        }
+        requisicao.encerrar();
+        return requisicao;
     }
 }
