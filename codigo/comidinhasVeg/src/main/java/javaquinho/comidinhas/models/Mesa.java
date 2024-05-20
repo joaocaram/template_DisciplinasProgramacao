@@ -1,22 +1,49 @@
 package javaquinho.comidinhas.models;
 
-public class Mesa {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-	private static int ultimoID;
-	private int idMesa;
+@Entity
+@Table(name = Mesa.TABLE_NAME)
+@AllArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode
+public class Mesa {
+	private static final String TABLE_NAME = "mesa";
+
+	// private static int ultimoID;
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
+    private Long idMesa;
+
+	@Column(name = "capacidade", nullable = false)
 	private int capacidade;
+
+	@Column(name = "ocupada", nullable = false)
 	private boolean ocupada;
 
-	static{
-		ultimoID = 0;
-	}
-	public Mesa(int capacidade) {
-		this.capacidade = 2;
-		if(capacidade>2)
-			this.capacidade = capacidade;
-		idMesa = ++ultimoID;
-		ocupada = false;
-	}
+	// static{
+	// 	ultimoID = 0;
+	// }
+
+	// public Mesa(int capacidade) {
+	// 	this.capacidade = 2;
+	// 	if(capacidade>2)
+	// 		this.capacidade = capacidade;
+	// 	id = ++ultimoID;
+	// 	ocupada = false;
+	// }
 
 	public void ocupar() {
 		ocupada = true;
@@ -30,7 +57,7 @@ public class Mesa {
 		return (quantPessoas <= capacidade && !ocupada);
 	}
 
-	public int getIdMesa(){
+	public long getIdMesa(){
 		return idMesa;
 	}
 	

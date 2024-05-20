@@ -5,17 +5,46 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Representa uma requisição feita por um cliente em um restaurante.
  */
+@Entity
+@Table(name = Requisicao.TABLE_NAME)
+@AllArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode
 public class Requisicao {
 
+    public static final String TABLE_NAME = "requisicao";
+
+    @Column(name = "cliente", nullable = false)
     private Cliente cliente;
+
+    @Column(name = "mesa", nullable = true)
     private Mesa mesa;
+
+    @Column(name = "quantPessoas", nullable = false)
     private int quantPessoas;
+
+    @Column(name = "entrada", nullable = true)
     private LocalDateTime entrada;
+
+    @Column(name = "saida", nullable = true)
     private LocalDateTime saida;
+
+    @Column(name = "encerrada", nullable = false)
     private boolean encerrada;
+
+    @Column(name = "produtos", nullable = true)
     private List<Produto> produtos;
 
     /**
