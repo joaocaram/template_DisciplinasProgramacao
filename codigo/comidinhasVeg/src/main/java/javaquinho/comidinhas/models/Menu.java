@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -16,17 +17,16 @@ import lombok.EqualsAndHashCode;
 @Table(name = Menu.TABLE_NAME)
 @AllArgsConstructor
 @EqualsAndHashCode
-
 public class Menu {
     public static final String TABLE_NAME = "menu";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
-    
+
     @OneToOne
-    @JoinColumn(name = "restaurante_id", nullable = false, updatable = true)
-    private Restaurante restaurante;
+    @JoinColumn(name = "produto_id", nullable = false, updatable = false)
+    private Produto produto;
 
     // private ArrayList<Produto> produtos;
 

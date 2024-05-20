@@ -56,9 +56,9 @@ public class Restaurante {
         }
     }
 
-    public String getMenu(){
-        return menu.retornaMenu();
-    }
+    // public String getMenu(){
+    //     return menu.retornaMenu();
+    // }
     
 
     /**
