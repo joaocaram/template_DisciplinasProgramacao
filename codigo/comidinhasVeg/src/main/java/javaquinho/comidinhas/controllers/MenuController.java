@@ -1,5 +1,6 @@
 package javaquinho.comidinhas.controllers;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javaquinho.comidinhas.models.Menu;
 import javaquinho.comidinhas.models.Produto;
@@ -37,8 +39,11 @@ public class MenuController {
     }
 
     @PostMapping
-    public Menu adicionarProduto(@RequestBody Menu menu) {
-        return repository.save(menu);
+    public ResponseEntity<Menu> adicionarProduto(@RequestBody Menu menu) {
+        Menu obj = repository.save(menu);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+            .path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
     
 }

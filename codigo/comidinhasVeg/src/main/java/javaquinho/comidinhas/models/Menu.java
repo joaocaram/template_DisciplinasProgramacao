@@ -12,10 +12,16 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = Menu.TABLE_NAME)
 @AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @EqualsAndHashCode
 public class Menu {
     public static final String TABLE_NAME = "menu";
@@ -29,25 +35,6 @@ public class Menu {
     private Produto produto;
 
     // private ArrayList<Produto> produtos;
-
-    public Menu() {
-
-        // this.produtos = new ArrayList<Produto>();
-        // String[] itensComida = { "Moqueca de Pamito", "Falafel Assado", "Salada Primavera com Macarrão Konjac",
-        //         "Escondidinho de Inhame", "Strogonoff de Cogumelos", "Caçarola de legumes" };
-        // String[] itensBebida = { "Água", "Copo de Suco", "Refrigerante orgânico", "Cerveja vegana",
-        //         "Taça de vinho vegano" };
-        // Integer[] valorComida = { 32, 20, 25, 18, 35, 22 };
-        // Integer[] valorBebida = { 3, 7, 7, 9, 18 };
-
-        // for (int i = 0; i < itensComida.length; i++) {
-        //     adicionarProduto(itensComida[i], valorComida[i]);
-        //     System.out.println(produtos.get(i));
-        // }
-        // for (int i = 0; i < itensBebida.length; i++) {
-        //     adicionarProduto(itensBebida[i], valorBebida[i]);
-        // }
-    }
 
     // public void adicionarProduto(String nome, double preco) {
     //     Produto novoProduto = new Produto(nome, preco);
