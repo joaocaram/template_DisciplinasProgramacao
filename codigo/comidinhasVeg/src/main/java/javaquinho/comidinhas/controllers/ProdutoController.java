@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/produtos")
+@Validated
 public class ProdutoController {
     @Autowired
     private ProdutoRepository repository;
@@ -32,7 +34,7 @@ public class ProdutoController {
         return ResponseEntity.ok().body(produtos);
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Produto> getProduto(@PathVariable Long id){
         Optional<Produto> produto = repository.findById(id);
 
