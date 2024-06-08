@@ -95,3 +95,20 @@ public class Menu {
     // return produtos.size();
     // }
 }
+
+/* 
+Corpo para criar menu
+Set<Produto> produtos = new LinkedHashSet()<Produto>;
+produtos.add(new Produto("Moqueca de Pamito", 32.0))
+produtos.add(new Produto("Falafel Assado", 20.0))
+produtos.add(new Produto("Salada Primavera com Macarrão Konjac", 25.0))
+produtos.add(new Produto("Escondidinho de Inhame", 18.0))
+produtos.add(new Produto("Strogonoff de Cogumelos", 35.0))
+produtos.add(new Produto("Caçarola de legumes", 22.0))
+produtos.add(new Produto("Água", 3.0))
+produtos.add(new Produto("Copo de Suco", 7.0))
+produtos.add(new Produto("Refrigerante orgânico", 7.0))
+produtos.add(new Produto("Cerveja vegana", 9.0))
+produtos.add(new Produto("Taça de vinho vegano", 18.0))
+this.produtos = produtos;
+*/
