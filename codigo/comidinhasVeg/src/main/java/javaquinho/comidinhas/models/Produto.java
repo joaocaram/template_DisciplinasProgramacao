@@ -1,24 +1,18 @@
 package javaquinho.comidinhas.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = Produto.TABLE_NAME)
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode
 public class Produto {
 
     public static final String TABLE_NAME = "produto";
@@ -34,20 +28,29 @@ public class Produto {
     @Column(name = "preco", nullable = false)
     private double preco;
 
-    // public Long getId(){
-    //     return idProduto;
-    // }
-    // public String getNome() {
-    //     return nome;
-    // }
+    // @ManyToOne
+    // @JoinColumn(name = "menuId")
+    // @JsonIgnore
+    // private Menu menu;
 
-    // public double getPreco() {
-    //     return preco;
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    // public Menu getMenu() {
+    //     return menu;
     // }
 
     // public String toString(){
 
-    //     return "ID: " + getId() + " nome: " + getNome() + " preço: R$" + getPreco();
-
+    // return "ID: " + getId() + " nome: " + getNome() + " preço: R$" + getPreco();
     // }
 }

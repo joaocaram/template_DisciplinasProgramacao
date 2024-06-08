@@ -59,8 +59,8 @@ public class Requisicao {
     @Column(name = "encerrada", nullable = false)
     private boolean encerrada;
 
-    @OneToOne
-    @JoinColumn(name = "produtos", nullable = true)
+    // @OneToOne
+    // @JoinColumn(name = "produtos", nullable = true)
     private List<Produto> produtos;
 
     /**
