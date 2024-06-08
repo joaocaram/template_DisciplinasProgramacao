@@ -44,7 +44,7 @@ public class Menu {
     @JsonIgnoreProperties("menu")
     @OneToMany(mappedBy = "menu")
     @Fetch(FetchMode.JOIN)
-    private Set<Produto> produtos = new LinkedHashSet<Produto>();
+    private Set<Produto> produtos;
 
     // @JoinColumn(name = "produto_id", nullable = false, updatable = false)
     // private Produto produto;
