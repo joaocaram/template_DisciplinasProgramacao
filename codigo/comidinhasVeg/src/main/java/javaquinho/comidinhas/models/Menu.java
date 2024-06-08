@@ -2,10 +2,15 @@ package javaquinho.comidinhas.models;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
-
+import java.util.Set;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.mapping.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,9 +41,11 @@ public class Menu {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    // @OneToMany(mappedBy = "menu")
-    // @Fetch(FetchMode.JOIN)
-    // private LinkedHashSet<Produto> produtos = new LinkedHashSet<Produto>();
+    @JsonIgnoreProperties("menu")
+    @OneToMany(mappedBy = "menu")
+    @Fetch(FetchMode.JOIN)
+    private Set<Produto> produtos = new LinkedHashSet<Produto>();
+
     // @JoinColumn(name = "produto_id", nullable = false, updatable = false)
     // private Produto produto;
 
@@ -68,10 +75,9 @@ public class Menu {
         // }
     }
 
-    // public void adicionarProduto(String nome, double preco) {
-    // Produto novoProduto = new Produto(nome, preco);
-    // produtos.add(novoProduto);
-    // }
+    public void adicionarProduto(Produto produto) {
+        this.produtos.add(produto);
+    }
 
     // public String retornaMenu() {
     // String relat = "";

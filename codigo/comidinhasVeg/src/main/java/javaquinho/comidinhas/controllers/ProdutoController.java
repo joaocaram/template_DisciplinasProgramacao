@@ -32,7 +32,7 @@ public class ProdutoController {
         return ResponseEntity.ok().body(produtos);
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Produto> getProduto(@PathVariable Long id){
         Optional<Produto> produto = repository.findById(id);
 

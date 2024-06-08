@@ -10,8 +10,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = Produto.TABLE_NAME)
 public class Produto {
 
@@ -28,26 +32,9 @@ public class Produto {
     @Column(name = "preco", nullable = false)
     private double preco;
 
-    // @ManyToOne
-    // @JoinColumn(name = "menuId")
-    // @JsonIgnore
-    // private Menu menu;
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    // public Menu getMenu() {
-    //     return menu;
-    // }
+    @ManyToOne
+    @JoinColumn(name = "menuId")
+    private Menu menu;
 
     // public String toString(){
 

@@ -9,5 +9,5 @@ import javaquinho.comidinhas.models.Menu;
 
 @Repository
 public interface MenuRepository extends JpaRepository<Menu, Long> {
-    Optional<Menu> findByProdutoId(Long id);
+    // Optional<Menu> findByProdutoId(Long id);
 }
