@@ -44,4 +44,17 @@ public class RequisicaoController {
         requisicao.setEntrada(LocalDateTime.now());
         return requisicaoRepository.save(requisicao);
     }
+
+    @PostMapping("/{id}/encerrar")
+    public ResponseEntity<Requisicao> encerrarRequisicao(@PathVariable int id){
+        Optional<Requisicao> requisicao = requisicaoRepository.findById(id);
+        if (requisicao.isPresent()) {
+            Requisicao r = requisicao.get();
+            r.setSaida(LocalDateTime.now());
+            r.setEncerrada(true);
+            return ResponseEntity.ok(requisicaoRepository.save(r));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
