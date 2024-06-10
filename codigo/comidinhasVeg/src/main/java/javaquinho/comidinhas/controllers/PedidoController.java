@@ -62,7 +62,7 @@ public class PedidoController {
         }
 
         Pedido pedido = optionalPedido.get();
-        pedido.getProdutos().add(produto);
+        pedido.addProduto(produto);
         pedidoRepository.save(pedido);
 
         return ResponseEntity.ok().body(pedido);
