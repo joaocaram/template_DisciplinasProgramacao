@@ -21,18 +21,7 @@ public class PedidoController {
     @Autowired
     private PedidoRepository pedidoRepository;
 
-    @GetMapping
-    public ResponseEntity<List<Pedido>> getAllPedidos() {
-        List<Pedido> pedidos = pedidoRepository.findAll();
-        return ResponseEntity.ok().body(pedidos);
-    }
-
-    @GetMapping("/{clienteId}")
-    public ResponseEntity<List<Pedido>> getPedidosByClienteId(@PathVariable Long clienteId) {
-        List<Pedido> pedidos = pedidoRepository.findByClienteId(clienteId);
-        return pedidos.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok().body(pedidos);
-    }
-
+    // Criar novo pedido
     @PostMapping
     public ResponseEntity<Pedido> criarPedido(@RequestBody Pedido pedido) {
         Pedido novoPedido = pedidoRepository.save(pedido);
@@ -41,6 +30,28 @@ public class PedidoController {
         return ResponseEntity.created(uri).body(novoPedido);
     }
 
+    // Puxar todos os pedidos
+    @GetMapping
+    public ResponseEntity<List<Pedido>> getAllPedidos() {
+        List<Pedido> pedidos = pedidoRepository.findAll();
+        return ResponseEntity.ok().body(pedidos);
+    }
+
+    // Puxar determinado pedido
+    @GetMapping("/{pedidoId}")
+    public ResponseEntity<Pedido> getPedidoById(@PathVariable Long pedidoId) {
+        Optional<Pedido> optionalPedido = pedidoRepository.findById(pedidoId);
+        return optionalPedido.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    // Puxar todos os pedidos do cliente
+    @GetMapping("/cliente/{clienteId}")
+    public ResponseEntity<List<Pedido>> getPedidosByClienteId(@PathVariable Long clienteId) {
+        List<Pedido> pedidos = pedidoRepository.findByClienteId(clienteId);
+        return pedidos.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok().body(pedidos);
+    }
+
+    // Atualizar pedido
     @PutMapping("/{pedidoId}/adicionar-produto")
     public ResponseEntity<Pedido> adicionarProdutoAoPedido(
             @PathVariable Long pedidoId,
