@@ -52,7 +52,17 @@ public class Pedido {
         return produtos;
     }
 
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
+    public void addProduto(Produto produto) {
+        this.produtos.add(produto);
+    }
+
+    public void removeProduto(Produto produto) {
+        this.produtos.remove(produto);
+    }
+
+    public double SomarTotal() {
+        return produtos.stream()
+               .mapToDouble(Produto::getPreco)
+               .sum();
     }
 }
