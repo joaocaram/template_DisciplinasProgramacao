@@ -57,10 +57,11 @@ public class Pedido {
     }
 
     public void removeProduto(Produto produto) {
+        
         this.produtos.remove(produto);
     }
 
-    public double SomarTotal() {
+    public double getSomarTotal() {
         return produtos.stream()
                .mapToDouble(Produto::getPreco)
                .sum();
