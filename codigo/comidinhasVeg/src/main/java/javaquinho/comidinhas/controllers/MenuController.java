@@ -48,5 +48,18 @@ public class MenuController {
         }
         return retornoMenu;
     }
-    
+
+    @PutMapping("/adicionarProduto")
+    public ResponseEntity<Menu> adicionarProduto(@RequestParam Long menuId, @RequestBody Produto produto){
+        Menu menu = repository.findById(menuId).orElse(null);
+        if (menu != null){
+            menu.adicionarProduto(produto);
+            produto.setMenu(menu);
+            repositorioProduto.save(produto);
+            return ResponseEntity.ok(repository.save(menu));
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
