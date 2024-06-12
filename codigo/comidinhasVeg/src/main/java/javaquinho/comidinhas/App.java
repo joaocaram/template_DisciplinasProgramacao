@@ -1,110 +1,150 @@
-// package javaquinho.comidinhas;
 
-// import java.util.Scanner;
+// IMPORT DE CLIENTE NO POSTMAN: 
 
-// import javaquinho.comidinhas.models.Restaurante;
-
-// public class App {
-//     public static void main(String[] args) {
-
-//         // Inicialização do Scanner para leitura de entrada do usuário
-//         Scanner scanner = new Scanner(System.in);
-//         // Inicialização da instância da classe Restaurante
-//         Restaurante restaurante = new Restaurante();
-//         // Variável para armazenar a opção escolhida pelo usuário
-//         int opcao;
-
-//         // Loop principal do programa
-//         do {
-//             // Exibe o menu de opções para o usuário
-//             System.out.println("\nEscolha uma opção:");
-//             System.out.println("1. Cadastrar cliente");
-//             System.out.println("2. Criar nova requisição");
-//             System.out.println("3. Mostrar fila de atendimento");
-//             System.out.println("4. Mostrar menu");
-//             System.out.println("5. Preencher pedido");
-//             System.out.println("6. Fechar Conta");
-//             System.out.println("7. Sair");
-
-//             // Obtém a opção escolhida pelo usuário
-//             opcao = scanner.nextInt();
-
-//             // Realiza a ação correspondente à opção escolhida
-//             switch (opcao) {
-
-//                 case 1:   // Cadastrar cliente ou criar requisição
-//                     /* 
-//                     Se o cliente não estiver cadastrado, solicita os dados necessários e cria um novo cliente.
-//                     Caso contrário, avança para a criação de uma nova requisição para o cliente existente.
-//                     */
-//                     String nome,  telContato,  CPF;
-//                     System.out.println("Digite o CPF: ");
-//                     CPF = scanner.next();
-//                     scanner.nextLine();
-//                     if(restaurante.clienteExiste(CPF)){
-//                         System.out.println("Cliente já possui cadastro.");
-//                     } else{
-//                         System.out.println("Digite o nome: ");
-//                         nome = scanner.nextLine();
-//                         System.out.println("Digite o telefone de contato: ");
-//                         telContato = scanner.nextLine();
-//                         restaurante.newCliente(nome, telContato, CPF);
-//                     }
-
-//                     // Verifica se o usuário deseja criar uma requisição de mesa
-//                     System.out.println("Deseja requerir uma mesa? Digite 1 para sim ou 0 para não.");
-//                     int continuar = scanner.nextInt();
-
-//                     // Se o usuário optar por não criar uma requisição, volta ao menu principal
-//                     if(continuar == 0){
-//                         break;
-//                     }
-
-//                 case 2:  
-//                     /* 
-//                     Cria uma nova requisição de mesa para um cliente existente.
-//                     */
-//                     String cpf; 
-//                     int quantidadePessoas;
-
-//                     // Solicita o CPF do cliente
-//                     System.out.println("Digite o CPF: ");
-//                     cpf = scanner.next();
-//                     scanner.nextLine();
-//                     // Solicita a quantidade de pessoas para a requisição
-//                     System.out.println("Digite a quantidade de pessoas: ");
-//                     quantidadePessoas = scanner.nextInt();
-//                     // Cria a requisição de mesa para o cliente informado
-//                     restaurante.criarRequisicao(cpf, quantidadePessoas); 
-//                     break;
-
-//                 case 3: // Mostra a fila de atendimento
-//                     restaurante.mostrarFilaAtendimento();  
-//                     break;
-
-//                 case 4:// Mostra o menu do restaurante
-//                     // System.out.println(restaurante.getMenu());
-//                     break;
-                
-//                 case 5:  // Preenche o pedido de uma Requisição/Mesa
-//                     // Implementação do preenchimento do pedido
-//                     break;
-
-//                 case 6: // Fecha a conta de uma mesa
-//                     // Implementação do fechamento de conta
-//                     break;
-
-//                 case 7: // Sai do programa
-//                     System.out.println("Saindo...");
-//                     break;
-
-//                 default:
-//                     System.out.println("Opção inválida.");
-//                     break;
-//             }
-
-//         } while (opcao != 7); // Continua o loop até que o usuário escolha a opção de sair
-
-//         scanner.close(); // Fecha o Scanner para liberar recursos
-//     }
-// }
+/* 
+{
+	"info": {
+		"_postman_id": "e6672f1d-3ea2-4470-8fee-0e00578f25c1",
+		"name": "Requisições do Cliente",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34537890",
+		"_collection_link": "https://aa5555-4919.postman.co/workspace/9d3ba132-78d7-4b10-b2ce-d12398d48bc1/collection/34537890-e6672f1d-3ea2-4470-8fee-0e00578f25c1?action=share&source=collection_link&creator=34537890"
+	},
+	"item": [
+		{
+			"name": "Listar todos clientes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar cliente por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/clientes/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"{id}"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar cliente",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Carlos Pereira\",\n  \"telefone\": \"11987654323\",\n  \"cpf\": \"12312312399\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar cliente existente",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Carlos Pereira Atualizado\",\n  \"telefone\": \"11987654324\",\n  \"cpf\": \"12312312399\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/clientes/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"{id}"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir cliente",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/clientes/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"{id}"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
+*/
