@@ -61,15 +61,20 @@ public class Requisicao {
     private Pedido pedido;
 
     public Requisicao(Cliente cliente, int quantPessoas) {
-        this.quantPessoas = 1;
-        if (quantPessoas > 1)
-            this.quantPessoas = quantPessoas;
+        if (cliente == null) {
+            throw new IllegalArgumentException("Cliente não pode ser nulo");
+        }
+        if (quantPessoas < 1) {
+            throw new IllegalArgumentException("A quantidade de pessoas deve ser pelo menos 1");
+        }
+        this.quantPessoas = quantPessoas;
         this.cliente = cliente;
-        entrada = saida = null;
-        mesa = null;
-        encerrada = false;
+        this.entrada = null;
+        this.saida = null;
+        this.mesa = null;
+        this.encerrada = false;
     }
-
+  
     public Mesa encerrar() {
         saida = LocalDateTime.now();
         mesa.desocupar();
