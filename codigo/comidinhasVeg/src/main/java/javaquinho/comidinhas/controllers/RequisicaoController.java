@@ -19,6 +19,7 @@ import javaquinho.comidinhas.models.Pedido;
 import javaquinho.comidinhas.models.Produto;
 import javaquinho.comidinhas.models.Requisicao;
 import javaquinho.comidinhas.repositories.RequisicaoRepository;
+import javaquinho.comidinhas.repositories.ProdutoRepository;
 
 @RestController
 @RequestMapping("/requisicoes")
@@ -26,6 +27,9 @@ public class RequisicaoController {
     
     @Autowired
     private RequisicaoRepository requisicaoRepository;
+
+    @Autowired
+    private ProdutoRepository produtoRepository;
 
     @GetMapping
     public List<Requisicao> getAllRequisicoes() {
@@ -60,17 +64,17 @@ public class RequisicaoController {
         }
     }
 
-    // @PutMapping("/adicionarProduto")
-    // public ResponseEntity<Requisicao> adicionarProduto(@RequestParam int requisicao, @RequestParam Long produto){
-    //     Requisicao req = requisicaoRepository.findById(requisicao).orElse(null);
-    //     Produto prod = produtoRepository.findById(produto).orElse(null);
-    //     if (req != null && prod != null) {
-    //         Pedido pedido = req.getPedido();
-    //         pedido.addProduto(prod);
-    //         return ResponseEntity.ok(requisicaoRepository.save(req));
-    //     }
-    //     else {
-    //         return ResponseEntity.notFound().build();
-    //     }
-    // }
+    @PutMapping("/adicionarProduto")
+    public ResponseEntity<Requisicao> adicionarProduto(@RequestParam int requisicao, @RequestParam Long produto){
+        Requisicao req = requisicaoRepository.findById(requisicao).orElse(null);
+        Produto prod = produtoRepository.findById(produto).orElse(null);
+        if (req != null && prod != null) {
+            Pedido pedido = req.getPedido();
+            pedido.addProduto(prod);
+            return ResponseEntity.ok(requisicaoRepository.save(req));
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
