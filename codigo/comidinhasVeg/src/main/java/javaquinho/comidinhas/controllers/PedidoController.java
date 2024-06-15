@@ -51,6 +51,19 @@ public class PedidoController {
         return pedidos.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok().body(pedidos);
     }
 
+    // Retornar o valor total do pedido
+    @GetMapping("/total/{pedidoId}")
+    public ResponseEntity<Double> getTotalPedido(@PathVariable Long pedidoId) {
+        Optional<Pedido> optionalPedido = pedidoRepository.findById(pedidoId);
+        if (optionalPedido.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Pedido pedido = optionalPedido.get();
+        double total = pedido.getSomarTotal();
+        return ResponseEntity.ok().body(total);
+    }
+
     // Atualizar pedido
     @PutMapping("/{pedidoId}/adicionar-produto")
     public ResponseEntity<Pedido> adicionarProdutoAoPedido(
