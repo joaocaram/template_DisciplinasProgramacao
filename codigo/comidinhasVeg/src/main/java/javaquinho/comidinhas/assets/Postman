@@ -1,0 +1,452 @@
+{
+	"info": {
+		"_postman_id": "1673e931-eede-4526-bb23-b0cd2fd6542e",
+		"name": "LPM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "34537890",
+		"_collection_link": "https://aa5555-4919.postman.co/workspace/aa-Workspace~9d3ba132-78d7-4b10-b2ce-d12398d48bc1/collection/34537890-1673e931-eede-4526-bb23-b0cd2fd6542e?action=share&source=collection_link&creator=34537890"
+	},
+	"item": [
+		{
+			"name": "Mesa",
+			"item": [
+				{
+					"name": "/mesas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"capacidade\": 8,\r\n    \"ocupada\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/mesas"
+					},
+					"response": []
+				},
+				{
+					"name": "/mesas/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{host}}/mesas/1"
+					},
+					"response": []
+				},
+				{
+					"name": "/mesas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{host}}/mesas"
+					},
+					"response": []
+				},
+				{
+					"name": "/mesas/ocupar/id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/mesas/ocupar/1"
+					},
+					"response": []
+				},
+				{
+					"name": "/mesas/id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{host}}/mesas/2"
+					},
+					"response": []
+				},
+				{
+					"name": "/mesas/desocupar/id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/mesas/desocupar/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Folder",
+			"item": [
+				{
+					"name": "/clientes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Eduardo\",\r\n    \"telefone\":\"31989133887\",\r\n    \"cpf\": \"13718866609\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/clientes"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedidos",
+			"item": [
+				{
+					"name": "/pedidos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cliente\":{\r\n        \"id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/pedidos"
+					},
+					"response": []
+				},
+				{
+					"name": "/pedidos",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "/pedidos/{id}",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "/pedidos/cliente/{id}",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "/pedidos/{id}/adicionar-produto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": "{{host}}/pedidos/1/adicionar-produto"
+					},
+					"response": []
+				},
+				{
+					"name": "/pedidos/total/{id}",
+					"request": {
+						"method": "PUT",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Requicao",
+			"item": [
+				{
+					"name": "/requisicoes/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{host}}/requisicoes/1"
+					},
+					"response": []
+				},
+				{
+					"name": "/requisicoes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{host}}/requisicoes"
+					},
+					"response": []
+				},
+				{
+					"name": "/requisicoes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cliente\":{\r\n        \"id\": 1\r\n    },\r\n    \"mesa\":{\r\n        \"idMesa\": 1\r\n    },\r\n    \"qntPessoas\": 8,\r\n    \"encerrada\": 0,\r\n    \"pedido\": {\r\n        \"id\": 1\r\n    }\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/requisicoes"
+					},
+					"response": []
+				},
+				{
+					"name": "/requisicoes/id/encerrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{host}}/requisicoes/1/encerrar"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "/clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/clientes"
+					},
+					"response": []
+				},
+				{
+					"name": "/clientes/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/clientes/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes",
+								"{id}"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/clientes",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Carlos Pereira\",\n  \"telefone\": \"11987654323\",\n  \"cpf\": \"12312312399\"\n}"
+						},
+						"url": "http://localhost:8080/clientes"
+					},
+					"response": []
+				},
+				{
+					"name": "/clientes/id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Carlos Alberto Pereira\",\n  \"telefone\": \"11987654321\",\n  \"cpf\": \"12312312399\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/clientes/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes",
+								"{id}"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/clientes/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/clientes/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientes",
+								"{id}"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Menu",
+			"item": [
+				{
+					"name": "/menus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/menu"
+					},
+					"response": []
+				},
+				{
+					"name": "/menus/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/menu/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"menu",
+								"{id}"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/menus",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Pizza Margherita\",\n  \"descricao\": \"Pizza com molho de tomate, mussarela e manjericão\",\n  \"preco\": 29.99\n}"
+						},
+						"url": "http://localhost:8080/menu"
+					},
+					"response": []
+				},
+				{
+					"name": "/adicionarProduto",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Pizza Margherita\",\n  \"descricao\": \"Pizza com molho de tomate, mussarela e manjericão fresco\",\n  \"preco\": 31.99\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/menu/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"menu",
+								"{id}"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:8080"
+		}
+	]
+}
