@@ -7,4 +7,5 @@ import javaquinho.comidinhas.models.Produto;
 
 @Repository
 public interface ProdutoRepository  extends JpaRepository<Produto, Long>{
+    
 }
