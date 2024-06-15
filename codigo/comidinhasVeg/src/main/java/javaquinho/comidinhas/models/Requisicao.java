@@ -31,7 +31,6 @@ public class Requisicao {
 
     public static final String TABLE_NAME = "requisicao";
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
@@ -57,32 +56,20 @@ public class Requisicao {
     @Column(name = "encerrada", nullable = false)
     private boolean encerrada;
 
-	@OneToOne
-	@JoinColumn(name = "pedido", nullable = true)
-	private Pedido pedido;
+    @OneToOne
+    @JoinColumn(name = "pedido", nullable = true)
+    private Pedido pedido;
 
-
-    /**
-     * Construtor da classe Requisicao.
-     * 
-     * @param cliente O cliente que fez a requisição.
-     * @param quantPessoas O número de pessoas para a requisição.
-     */
     public Requisicao(Cliente cliente, int quantPessoas) {
         this.quantPessoas = 1;
         if (quantPessoas > 1)
-        this.quantPessoas = quantPessoas;
+            this.quantPessoas = quantPessoas;
         this.cliente = cliente;
         entrada = saida = null;
         mesa = null;
         encerrada = false;
     }
 
-    /**
-     * Encerra a requisição e desocupa a mesa associada.
-     * 
-     * @return A mesa que foi desocupada.
-     */
     public Mesa encerrar() {
         saida = LocalDateTime.now();
         mesa.desocupar();
@@ -90,11 +77,6 @@ public class Requisicao {
         return mesa;
     }
 
-    /**
-     * Aloca uma mesa à requisição se estiver disponível.
-     * 
-     * @param mesa A mesa a ser alocada.
-     */
     public void alocarMesa(Mesa mesa) {
         if (mesa.estahLiberada(quantPessoas)) {
             this.mesa = mesa;
@@ -103,39 +85,27 @@ public class Requisicao {
         }
     }
 
-    /**
-     * Verifica se a requisição está encerrada.
-     * 
-     * @return true se a requisição estiver encerrada, caso contrário, false.
-     */
     public boolean estahEncerrada() {
         return encerrada;
     }
 
-    /**
-     * Verifica se a requisição é da mesa com o ID fornecido.
-     * 
-     * @param idMesa O ID da mesa a ser verificado.
-     * @return true se a requisição for da mesa com o ID fornecido, caso contrário, false.
-     */
     public boolean ehDaMesa(int idMesa) {
         return idMesa == mesa.getIdMesa();
     }
 
-    /**
-     * Retorna a quantidade de pessoas associadas à requisição.
-     * 
-     * @return A quantidade de pessoas.
-     */
     public int quantPessoas() {
         return quantPessoas;
     }
 
-    /**
-     * Retorna uma representação em formato de string da requisição.
-     * 
-     * @return Uma string representando os detalhes da requisição.
-     */
+    public double exibirConta() {
+        return pedido.getSomarTotal();
+    }
+
+    public double exibirValorPorPessoa() {
+        return pedido.getSomarTotal() / quantPessoas;
+    }
+
+    @Override
     public String toString() {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         StringBuilder stringReq = new StringBuilder(cliente.toString());
@@ -149,7 +119,9 @@ public class Requisicao {
         }
         stringReq.append("\nProdutos:\n");
         if (pedido != null) {
-            stringReq.append(pedido.toString());
+            stringReq.append(pedido.toString()).append("\n");
+            stringReq.append("Total: ").append(exibirConta()).append("\n");
+            stringReq.append("Valor por pessoa: ").append(exibirValorPorPessoa()).append("\n");
         }
         return stringReq.toString();
     }
