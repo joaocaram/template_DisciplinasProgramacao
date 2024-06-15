@@ -105,6 +105,12 @@ public class Requisicao {
         return pedido.getSomarTotal() / quantPessoas;
     }
 
+    public void fecharPedido() {
+        if (pedido != null) {
+            pedido = null;
+        }
+    }
+
     @Override
     public String toString() {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
