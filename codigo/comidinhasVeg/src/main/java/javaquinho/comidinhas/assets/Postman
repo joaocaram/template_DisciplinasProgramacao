@@ -94,29 +94,6 @@
 			]
 		},
 		{
-			"name": "New Folder",
-			"item": [
-				{
-					"name": "/clientes",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Eduardo\",\r\n    \"telefone\":\"31989133887\",\r\n    \"cpf\": \"13718866609\" \r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{host}}/clientes"
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "Pedidos",
 			"item": [
 				{
