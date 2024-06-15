@@ -9,11 +9,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javaquinho.comidinhas.models.Pedido;
+import javaquinho.comidinhas.models.Produto;
 import javaquinho.comidinhas.models.Requisicao;
 import javaquinho.comidinhas.repositories.RequisicaoRepository;
 
@@ -56,4 +59,18 @@ public class RequisicaoController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    // @PutMapping("/adicionarProduto")
+    // public ResponseEntity<Requisicao> adicionarProduto(@RequestParam int requisicao, @RequestParam Long produto){
+    //     Requisicao req = requisicaoRepository.findById(requisicao).orElse(null);
+    //     Produto prod = produtoRepository.findById(produto).orElse(null);
+    //     if (req != null && prod != null) {
+    //         Pedido pedido = req.getPedido();
+    //         pedido.addProduto(prod);
+    //         return ResponseEntity.ok(requisicaoRepository.save(req));
+    //     }
+    //     else {
+    //         return ResponseEntity.notFound().build();
+    //     }
+    // }
 }

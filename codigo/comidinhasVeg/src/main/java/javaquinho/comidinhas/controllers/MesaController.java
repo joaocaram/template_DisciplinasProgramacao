@@ -34,11 +34,22 @@ public class MesaController {
             .orElse(ResponseEntity.notFound().build());
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Mesa> updateMesa(@PathVariable int id, @RequestBody Mesa mesa) {
+    @PatchMapping("/ocupar/{id}")
+    public ResponseEntity<Mesa> updateOcuparMesa(@PathVariable int id, @RequestBody Mesa mesa) {
         return mesaRepository.findById(id)
             .map(mesaData -> {
-                mesaData.setOcupada(mesa.isOcupada());
+                mesaData.ocupar();
+                Mesa updatedMesa = mesaRepository.save(mesaData);
+                return ResponseEntity.ok(updatedMesa);
+            })
+            .orElse(ResponseEntity.notFound().build());
+    } 
+
+    @PatchMapping("/desocupar/{id}")
+    public ResponseEntity<Mesa> updateDesocuparMesa(@PathVariable int id, @RequestBody Mesa mesa) {
+        return mesaRepository.findById(id)
+            .map(mesaData -> {
+                mesaData.desocupar();
                 Mesa updatedMesa = mesaRepository.save(mesaData);
                 return ResponseEntity.ok(updatedMesa);
             })
