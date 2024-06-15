@@ -2,7 +2,6 @@ package javaquinho.comidinhas.models;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,9 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * Representa uma requisição feita por um cliente em um restaurante.
- */
+
 @Entity
 @Table(name = Requisicao.TABLE_NAME)
 @AllArgsConstructor
@@ -73,6 +70,8 @@ public class Requisicao {
         this.saida = null;
         this.mesa = null;
         this.encerrada = false;
+        this.pedido = new Pedido(); 
+        this.pedido.setCliente(cliente); 
     }
   
     public Mesa encerrar() {
@@ -116,6 +115,29 @@ public class Requisicao {
         }
     }
 
+    public void adicionarProduto(Produto produto) {
+        if (this.encerrada) {
+            throw new IllegalStateException("Não é possível adicionar produtos a uma requisição finalizada.");
+        }
+        if (this.pedido == null) {
+            this.pedido = new Pedido();
+        }
+        try {
+            this.pedido.addProduto(produto);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao adicionar produto ao pedido: " + e.getMessage(), e);
+        }
+    }
+
+    public void removerProduto(Produto produto) {
+        if (this.encerrada) {
+            throw new IllegalStateException("Não é possível remover produtos de uma requisição finalizada.");
+        }
+        if (this.pedido != null) {
+            this.pedido.removeProduto(produto);
+        }
+    }
+
     @Override
     public String toString() {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -130,7 +152,9 @@ public class Requisicao {
         }
         stringReq.append("\nProdutos:\n");
         if (pedido != null) {
-            stringReq.append(pedido.toString()).append("\n");
+            for (Produto produto : pedido.getProdutos()) {
+                stringReq.append(produto.getNome()).append(" - R$").append(produto.getPreco()).append("\n");
+            }
             stringReq.append("Total: ").append(exibirConta()).append("\n");
             stringReq.append("Valor por pessoa: ").append(exibirValorPorPessoa()).append("\n");
         }
