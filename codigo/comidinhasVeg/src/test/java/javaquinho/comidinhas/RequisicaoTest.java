@@ -1,53 +1,94 @@
-package javaquinho.comidinhas;
+package javaquinho.comidinhas.models;
 
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
 public class RequisicaoTest {
 
-    // private Cliente cliente;
+    private Cliente cliente;
+    private Requisicao requisicao;
+    private Mesa mesa;
+    private Produto produto;
 
-    // @BeforeEach
-    // public void setup() {
-    //     cliente = new Cliente("Ciclano", "987654321", "987.654.321-00");
-    // }
+    @BeforeEach
+    public void setUp() {
+        cliente = new Cliente();
+        cliente.setNome("Cliente Teste");
+        
+        mesa = new Mesa();
+        mesa.setIdMesa(1);
+        mesa.setCapacidade(4);
+        
+        produto = new Produto();
+        produto.setNome("Produto Teste");
+        produto.setPreco(10.0);
+        
+        requisicao = new Requisicao(cliente, 3);
+    }
 
-    // @Test
-    // public void testGetQuantidadePessoas() {
-    //     Requisicao requisicao = new Requisicao(cliente, 5);
-    //     assertEquals(5, requisicao.getQuantidadePessoas());
-    // }
+    @Test
+    public void testRequisicaoConstrutor() {
+        assertNotNull(requisicao);
+        assertEquals(cliente, requisicao.getCliente());
+        assertEquals(3, requisicao.getQuantPessoas());
+        assertNull(requisicao.getMesa());
+        assertFalse(requisicao.isEncerrada());
+    }
 
-    // @Test
-    // public void testAtualizarQuantidadePessoas() {
-    //     Requisicao requisicao = new Requisicao(cliente, 3);
+    @Test
+    public void testAlocarMesa() {
+        requisicao.alocarMesa(mesa);
+        assertNotNull(requisicao.getMesa());
+        assertEquals(mesa, requisicao.getMesa());
+        assertNotNull(requisicao.getEntrada());
+    }
 
-    //     assertTrue(requisicao.atualizarQuantidadePessoas(5));
-    //     assertEquals(5, requisicao.getQuantidadePessoas());
+    @Test
+    public void testEncerrar() {
+        requisicao.alocarMesa(mesa);
+        Mesa mesaEncerrada = requisicao.encerrar();
+        assertTrue(requisicao.isEncerrada());
+        assertNotNull(requisicao.getSaida());
+        assertEquals(mesa, mesaEncerrada);
+    }
 
-    //     assertFalse(requisicao.atualizarQuantidadePessoas(10));
-    //     assertEquals(5, requisicao.getQuantidadePessoas());
-    // }
+    @Test
+    public void testAdicionarProduto() {
+        requisicao.adicionarProduto(produto);
+        assertNotNull(requisicao.getPedido());
+        assertTrue(requisicao.getPedido().getProdutos().contains(produto));
+    }
 
-    // @Test
-    // public void testVerificarDisponibilidadeMesa() {
-    //     Requisicao requisicao = new Requisicao(cliente, 4);
-    //     Mesa mesaDisponivel = new Mesa(4);
-    //     Mesa mesaOcupada = new Mesa(4);
-    //     mesaOcupada.ocupar(requisicao);
+    @Test
+    public void testRemoverProduto() {
+        requisicao.adicionarProduto(produto);
+        requisicao.removerProduto(produto);
+        assertFalse(requisicao.getPedido().getProdutos().contains(produto));
+    }
 
-    //     assertTrue(requisicao.verificarDisponibilidadeMesa(4, mesaDisponivel));
+    @Test
+    public void testExibirConta() {
+        requisicao.adicionarProduto(produto);
+        assertEquals(10.0, requisicao.exibirConta());
+    }
 
-    //     assertFalse(requisicao.verificarDisponibilidadeMesa(4, mesaOcupada));
-    // }
+    @Test
+    public void testExibirValorPorPessoa() {
+        requisicao.adicionarProduto(produto);
+        assertEquals(10.0 / 3, requisicao.exibirValorPorPessoa());
+    }
 
-    // @Test
-    // public void testAdicionarProduto() {
-    //     Requisicao requisicao = new Requisicao(cliente, 3);
-    //     Produto produto = new Produto("Pizza", 20.0);
-
-    //     requisicao.adicionarProduto(produto);
-    //     assertEquals(1, requisicao.getPedido().size());
-    //     assertEquals(produto, requisicao.getPedido().get(0));
-    // }
+    @Test
+    public void testToString() {
+        requisicao.alocarMesa(mesa);
+        requisicao.adicionarProduto(produto);
+        String output = requisicao.toString();
+        assertTrue(output.contains("Cliente Teste"));
+        assertTrue(output.contains("Produto Teste - R$10.0"));
+        assertTrue(output.contains("Total: 10.0"));
+        assertTrue(output.contains("Valor por pessoa: " + 10.0 / 3));
+    }
 }
