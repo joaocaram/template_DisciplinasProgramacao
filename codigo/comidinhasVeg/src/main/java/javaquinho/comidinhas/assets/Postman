@@ -392,7 +392,7 @@
 					"response": []
 				},
 				{
-					"name": "/adicionarProduto",
+					"name": "menus/adicionarProduto",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -429,8 +429,32 @@
 			]
 		},
 		{
-			"name": "Produto",
+			"name": "Produtos",
 			"item": [
+				{
+					"name": "/produtos/{id}",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "/produtos",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "/produtos",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
 				{
 					"name": "/produtos/all",
 					"request": {
