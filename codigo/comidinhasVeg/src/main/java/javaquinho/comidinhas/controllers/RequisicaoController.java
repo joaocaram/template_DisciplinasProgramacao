@@ -37,7 +37,7 @@ public class RequisicaoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Requisicao> getRequisicaoById(@PathVariable int id) {
+    public ResponseEntity<Requisicao> getRequisicaoById(@PathVariable Long id) {
         Optional<Requisicao> requisicao = requisicaoRepository.findById(id);
         if (requisicao.isPresent()) {
             return ResponseEntity.ok(requisicao.get());
@@ -54,7 +54,7 @@ public class RequisicaoController {
     }
 
     @PutMapping("/{id}/encerrar")
-    public ResponseEntity<Requisicao> encerrarRequisicao(@PathVariable int id){
+    public ResponseEntity<Requisicao> encerrarRequisicao(@PathVariable Long id){
     Requisicao requisicao = requisicaoRepository.findById(id).orElse(null);
         if (requisicao != null) {
             requisicao.encerrar();
@@ -65,7 +65,7 @@ public class RequisicaoController {
     }
 
     @PutMapping("/adicionarProduto")
-    public ResponseEntity<Requisicao> adicionarProduto(@RequestParam int requisicao, @RequestParam Long produto){
+    public ResponseEntity<Requisicao> adicionarProduto(@RequestParam Long requisicao, @RequestParam Long produto){
         Requisicao req = requisicaoRepository.findById(requisicao).orElse(null);
         Produto prod = produtoRepository.findById(produto).orElse(null);
         if (req != null && prod != null) {

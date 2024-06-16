@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import javaquinho.comidinhas.models.Requisicao;
 
 @Repository
-public interface RequisicaoRepository extends JpaRepository<Requisicao, Integer>{
+public interface RequisicaoRepository extends JpaRepository<Requisicao, Long>{
     
 }
