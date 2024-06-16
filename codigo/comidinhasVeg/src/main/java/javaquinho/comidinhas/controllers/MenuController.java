@@ -40,12 +40,6 @@ public class MenuController {
     @PostMapping
     public Menu criarMenu(@RequestBody Menu menu) {
         Menu retornoMenu = repository.save(menu);
-        if (menu.getProdutos().size() != 0){
-            for (Produto produto : menu.getProdutos()){
-                produto.setMenu(retornoMenu);
-                repositorioProduto.save(produto);
-            }
-        }
         return retornoMenu;
     }
 
@@ -54,8 +48,20 @@ public class MenuController {
         Menu menu = repository.findById(menuId).orElse(null);
         if (menu != null){
             menu.adicionarProduto(produto);
-            produto.setMenu(menu);
-            repositorioProduto.save(produto);
+            return ResponseEntity.ok(repository.save(menu));
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/adicionarProduto/all")
+    public ResponseEntity<Menu> adicionarProduto(@RequestParam Long menuId, @RequestBody List<Produto> produtos){
+        Menu menu = repository.findById(menuId).orElse(null);
+        if (menu != null){
+            for (Produto p : produtos) {
+                menu.adicionarProduto(p);
+            }
             return ResponseEntity.ok(repository.save(menu));
         }
         else {

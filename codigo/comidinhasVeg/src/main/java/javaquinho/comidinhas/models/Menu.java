@@ -17,6 +17,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -42,29 +45,15 @@ public class Menu {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @JsonIgnoreProperties("menu")
-    @OneToMany(mappedBy = "menu")
-    @Fetch(FetchMode.JOIN)
+     @ManyToMany
+    @JoinTable(
+        name = "menu_produto",
+        joinColumns = @JoinColumn(name = "menu_id"),
+        inverseJoinColumns = @JoinColumn(name = "produto_id")
+    )
     private Set<Produto> produtos;
 
     public void adicionarProduto(Produto produto) {
         this.produtos.add(produto);
     }
 }
-
-/* 
-Corpo para criar menu
-Set<Produto> produtos = new LinkedHashSet()<Produto>;
-produtos.add(new Produto("Moqueca de Pamito", 32.0))
-produtos.add(new Produto("Falafel Assado", 20.0))
-produtos.add(new Produto("Salada Primavera com Macarrão Konjac", 25.0))
-produtos.add(new Produto("Escondidinho de Inhame", 18.0))
-produtos.add(new Produto("Strogonoff de Cogumelos", 35.0))
-produtos.add(new Produto("Caçarola de legumes", 22.0))
-produtos.add(new Produto("Água", 3.0))
-produtos.add(new Produto("Copo de Suco", 7.0))
-produtos.add(new Produto("Refrigerante orgânico", 7.0))
-produtos.add(new Produto("Cerveja vegana", 9.0))
-produtos.add(new Produto("Taça de vinho vegano", 18.0))
-this.produtos = produtos;
-*/

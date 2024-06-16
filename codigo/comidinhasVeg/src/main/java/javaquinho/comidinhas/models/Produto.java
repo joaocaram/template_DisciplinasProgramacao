@@ -31,13 +31,4 @@ public class Produto {
 
     @Column(name = "preco", nullable = false)
     private double preco;
-
-    @ManyToOne
-    @JoinColumn(name = "menuId")
-    private Menu menu;
-
-    // public String toString(){
-
-    // return "ID: " + getId() + " nome: " + getNome() + " preço: R$" + getPreco();
-    // }
 }
