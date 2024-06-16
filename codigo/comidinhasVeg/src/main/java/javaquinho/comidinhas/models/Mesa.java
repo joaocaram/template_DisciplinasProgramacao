@@ -27,7 +27,7 @@ public class Mesa {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    private Long idMesa;
+    private int idMesa;
 
 	@Column(name = "capacidade", nullable = false)
 	private int capacidade;
@@ -59,7 +59,7 @@ public class Mesa {
 		return (quantPessoas <= capacidade && !ocupada);
 	}
 
-	public long getIdMesa(){
+	public int getIdMesa(){
 		return idMesa;
 	}
 	
