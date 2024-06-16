@@ -16,7 +16,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Entity
 @Table(name = Requisicao.TABLE_NAME)
 @AllArgsConstructor
@@ -75,6 +74,9 @@ public class Requisicao {
     }
   
     public Mesa encerrar() {
+        if (mesa == null) {
+            throw new IllegalStateException("Não é possível encerrar uma requisição sem uma mesa alocada.");
+        }
         saida = LocalDateTime.now();
         mesa.desocupar();
         encerrada = true;
