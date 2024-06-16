@@ -161,24 +161,6 @@
 			"name": "Requicao",
 			"item": [
 				{
-					"name": "/requisicoes/id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{host}}/requisicoes/1"
-					},
-					"response": []
-				},
-				{
-					"name": "/requisicoes",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{host}}/requisicoes"
-					},
-					"response": []
-				},
-				{
 					"name": "/requisicoes",
 					"request": {
 						"method": "POST",
@@ -197,11 +179,38 @@
 					"response": []
 				},
 				{
+					"name": "/requisicoes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{host}}/requisicoes"
+					},
+					"response": []
+				},
+				{
+					"name": "/requisicoes/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{host}}/requisicoes/1"
+					},
+					"response": []
+				},
+				{
 					"name": "/requisicoes/id/encerrar",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"url": "{{host}}/requisicoes/1/encerrar"
+					},
+					"response": []
+				},
+				{
+					"name": "/requisicoes/adicionarProduto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": "{{host}}/requisicoes/adicionarProduto"
 					},
 					"response": []
 				}
@@ -299,7 +308,7 @@
 					"response": []
 				},
 				{
-					"name": "/clientes/{id}",
+					"name": "/clientes/id",
 					"request": {
 						"method": "DELETE",
 						"header": [],
