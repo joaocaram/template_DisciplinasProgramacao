@@ -427,6 +427,20 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Produto",
+			"item": [
+				{
+					"name": "/produtos/all",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{host}}/produtos/all"
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"variable": [
