@@ -66,8 +66,7 @@ public class PedidoFechadoController {
         }
 
         PedidoFechado pedido = optionalPedido.get();
-        Requisicao req = repositoryRequisicao.findByPedido(pedido);
-        double total = pedido.getSomarTotal(req.getQuantPessoas());
+        double total = pedido.getSomarTotal();
         return ResponseEntity.ok().body(total);
     }
 
@@ -76,12 +75,12 @@ public class PedidoFechadoController {
     public ResponseEntity<PedidoFechado> adicionarProdutoAoPedido(
             @PathVariable Long pedidoId,
             @RequestBody Produto produto) {
-        Optional<PedidoFechado> optionalPedido = repository.findById(pedidoId);
-        if (optionalPedido.isEmpty()) {
+        PedidoFechado pedido = repository.findById(pedidoId).orElse(null);
+        if (pedido == null) {
             return ResponseEntity.notFound().build();
         }
 
-        PedidoFechado pedido = optionalPedido.get();
+        Requisicao req = repositoryRequisicao.findByPedido(pedido);
         pedido.addProduto(produto);
         repository.save(pedido);
 

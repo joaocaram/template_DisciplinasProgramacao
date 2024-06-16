@@ -9,6 +9,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import javaquinho.comidinhas.excecoes.LimiteProdutosException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class Pedido {
         return produtos;
     }
 
-    public void addProduto(Produto produto) {
+    public void addProduto(Produto produto) throws LimiteProdutosException {
         this.produtos.add(produto);
     }
 
