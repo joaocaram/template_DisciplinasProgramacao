@@ -46,4 +46,10 @@ public class ProdutoController {
             .path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
+    @PostMapping("/all")
+    public List<Produto> createProdutos(@RequestBody List<Produto> produto) {
+        List<Produto> objs = repository.saveAll(produto);
+        return objs;
+    }
 }
