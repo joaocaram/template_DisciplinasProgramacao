@@ -15,6 +15,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import javaquinho.comidinhas.excecoes.LimiteProdutosException;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -45,7 +46,7 @@ public class Menu {
     )
     private Set<Produto> produtos;
 
-    public void adicionarProduto(Produto produto) {
+    public void adicionarProduto(Produto produto) throws LimiteProdutosException {
         this.produtos.add(produto);
     }
 }
