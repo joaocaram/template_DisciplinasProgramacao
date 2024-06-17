@@ -6,11 +6,7 @@ import jakarta.persistence.OneToOne;
 import javaquinho.comidinhas.excecoes.LimiteProdutosException;
 @Entity
 public class PedidoFechado extends Pedido {
-
-    @OneToOne
-    @JoinColumn(name = "requisicao", nullable = true)
-    private Requisicao requisicao;
-
+    
     private static int MAXIMO_ITENS_PESSOA = 2;
 
     public int getMaximoItens() {

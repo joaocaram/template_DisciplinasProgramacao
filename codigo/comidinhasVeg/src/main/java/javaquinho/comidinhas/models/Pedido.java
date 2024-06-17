@@ -8,6 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import javaquinho.comidinhas.excecoes.LimiteProdutosException;
 
@@ -32,6 +33,10 @@ public class Pedido {
         joinColumns = @JoinColumn(name = "pedido_id"),
         inverseJoinColumns = @JoinColumn(name = "produto_id")
     )
+
+    @OneToOne
+    @JoinColumn(name = "requisicao", nullable = true)
+    private Requisicao requisicao;
 
     private List<Produto> produtos = new ArrayList<>();
 
