@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,8 +60,8 @@ public class RequisicaoController {
     @PostMapping("/{idCliente}/{quantPessoas}")
     public Requisicao createRequisicao(@PathVariable Integer idCliente, @PathVariable Integer quantPessoas) {
         Cliente cliente = clienteRepository.findById(idCliente).orElse(null);
-            Requisicao req = new Requisicao(cliente, quantPessoas);
-            return requisicaoRepository.save(req);   
+        Requisicao req = new Requisicao(cliente, quantPessoas);
+        return requisicaoRepository.save(req);   
     }
 
     @PutMapping("/{id}/encerrar")
@@ -107,7 +108,7 @@ public class RequisicaoController {
         }
     }
 
-    @PutMapping("/alocar/{id}/{idMesa}")
+    @PatchMapping("/alocar/{id}/{idMesa}")
     public ResponseEntity<Requisicao> alocarMesa(@PathVariable Long id, @PathVariable Integer idMesa) {
         Requisicao requisicao = requisicaoRepository.findById(id).orElse(null);
         Mesa mesa = mesaRepository.findById(idMesa).orElse(null);
