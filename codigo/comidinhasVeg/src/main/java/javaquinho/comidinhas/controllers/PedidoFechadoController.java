@@ -5,12 +5,9 @@ import java.util.Optional;
 import java.net.URI;
 
 import javaquinho.comidinhas.excecoes.LimiteProdutosException;
-import javaquinho.comidinhas.models.Pedido;
 import javaquinho.comidinhas.models.PedidoFechado;
 import javaquinho.comidinhas.models.Produto;
-import javaquinho.comidinhas.models.Requisicao;
 import javaquinho.comidinhas.repositories.PedidoFechadoRepository;
-import javaquinho.comidinhas.repositories.PedidoRepository;
 import javaquinho.comidinhas.repositories.RequisicaoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -37,3 +37,4 @@ public class Cliente {
     @Column(name = "cpf", length = 11, nullable = false, unique = true)
     private String cpf;
 }
+
