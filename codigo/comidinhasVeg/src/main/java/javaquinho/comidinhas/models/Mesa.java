@@ -47,6 +47,11 @@ public class Mesa {
 	// 	ocupada = false;
 	// }
 
+	public Mesa(int capacidade) {
+		this.capacidade = capacidade;
+		ocupada = false;
+	}
+
 	public void ocupar() {
 		ocupada = true;
 	}

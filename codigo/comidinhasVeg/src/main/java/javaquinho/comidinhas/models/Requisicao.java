@@ -72,6 +72,11 @@ public class Requisicao {
         this.pedido = new Pedido(); 
         this.pedido.setCliente(cliente); 
     }
+
+    public Requisicao(Cliente cliente, Integer quantPessoas) {
+        this.cliente = cliente;
+        this.quantPessoas = quantPessoas;
+    }
   
     public Mesa encerrar() {
         if (mesa == null) {

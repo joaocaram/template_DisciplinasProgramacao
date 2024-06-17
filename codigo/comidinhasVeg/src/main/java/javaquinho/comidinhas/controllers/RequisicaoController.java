@@ -1,6 +1,5 @@
 package javaquinho.comidinhas.controllers;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,10 +15,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javaquinho.comidinhas.excecoes.LimiteProdutosException;
+import javaquinho.comidinhas.models.Cliente;
+import javaquinho.comidinhas.models.Mesa;
 import javaquinho.comidinhas.models.Pedido;
 import javaquinho.comidinhas.models.Produto;
 import javaquinho.comidinhas.models.Requisicao;
 import javaquinho.comidinhas.repositories.RequisicaoRepository;
+import javaquinho.comidinhas.repositories.ClienteRepository;
+import javaquinho.comidinhas.repositories.MesaRepository;
 import javaquinho.comidinhas.repositories.ProdutoRepository;
 
 @RestController
@@ -31,6 +34,12 @@ public class RequisicaoController {
 
     @Autowired
     private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private MesaRepository mesaRepository;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     @GetMapping
     public List<Requisicao> getAllRequisicoes() {
@@ -47,10 +56,11 @@ public class RequisicaoController {
         }
     }
 
-    @PostMapping
-    public Requisicao createRequisicao(@RequestBody Requisicao requisicao) {
-        requisicao.setEntrada(LocalDateTime.now());
-        return requisicaoRepository.save(requisicao);
+    @PostMapping("/{idCliente}/{quantPessoas}")
+    public Requisicao createRequisicao(@PathVariable Integer idCliente, @PathVariable Integer quantPessoas) {
+        Cliente cliente = clienteRepository.findById(idCliente).orElse(null);
+            Requisicao req = new Requisicao(cliente, quantPessoas);
+            return requisicaoRepository.save(req);   
     }
 
     @PutMapping("/{id}/encerrar")
@@ -83,5 +93,26 @@ public class RequisicaoController {
         else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    /*patch que linka um pedido a requisição */
+    @PutMapping("/{id}/pedido")
+    public ResponseEntity<Requisicao> linkarPedido(@PathVariable Long id, @RequestBody Pedido pedido){
+        Requisicao requisicao = requisicaoRepository.findById(id).orElse(null);
+        if (requisicao != null) {
+            requisicao.setPedido(pedido);
+            return ResponseEntity.ok(requisicaoRepository.save(requisicao));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/alocar/{id}/{idMesa}")
+    public ResponseEntity<Requisicao> alocarMesa(@PathVariable Long id, @PathVariable Integer idMesa) {
+        Requisicao requisicao = requisicaoRepository.findById(id).orElse(null);
+        Mesa mesa = mesaRepository.findById(idMesa).orElse(null);
+        requisicao.alocarMesa(mesa);
+        requisicaoRepository.save(requisicao);
+        return ResponseEntity.ok(requisicao);
     }
 }
