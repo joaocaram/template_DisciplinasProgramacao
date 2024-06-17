@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javaquinho.comidinhas.excecoes.LimiteProdutosException;
 import javaquinho.comidinhas.models.Pedido;
 import javaquinho.comidinhas.models.Produto;
 import javaquinho.comidinhas.models.Requisicao;
@@ -24,7 +25,7 @@ import javaquinho.comidinhas.repositories.ProdutoRepository;
 @RestController
 @RequestMapping("/requisicoes")
 public class RequisicaoController {
-    
+
     @Autowired
     private RequisicaoRepository requisicaoRepository;
 
@@ -45,17 +46,16 @@ public class RequisicaoController {
             return ResponseEntity.notFound().build();
         }
     }
-    
 
     @PostMapping
-    public Requisicao createRequisicao(@RequestBody Requisicao requisicao){
+    public Requisicao createRequisicao(@RequestBody Requisicao requisicao) {
         requisicao.setEntrada(LocalDateTime.now());
         return requisicaoRepository.save(requisicao);
     }
 
     @PutMapping("/{id}/encerrar")
-    public ResponseEntity<Requisicao> encerrarRequisicao(@PathVariable Long id){
-    Requisicao requisicao = requisicaoRepository.findById(id).orElse(null);
+    public ResponseEntity<Requisicao> encerrarRequisicao(@PathVariable Long id) {
+        Requisicao requisicao = requisicaoRepository.findById(id).orElse(null);
         if (requisicao != null) {
             requisicao.encerrar();
             return ResponseEntity.ok(requisicaoRepository.save(requisicao));
@@ -70,8 +70,15 @@ public class RequisicaoController {
         Produto prod = produtoRepository.findById(produto).orElse(null);
         if (req != null && prod != null) {
             Pedido pedido = req.getPedido();
-            pedido.addProduto(prod);
-            return ResponseEntity.ok(requisicaoRepository.save(req));
+
+            try {
+                pedido.addProduto(prod);
+                return ResponseEntity.ok(requisicaoRepository.save(req));
+            }
+            catch (LimiteProdutosException e){
+                return ResponseEntity.status(500).build();
+            }
+            
         }
         else {
             return ResponseEntity.notFound().build();

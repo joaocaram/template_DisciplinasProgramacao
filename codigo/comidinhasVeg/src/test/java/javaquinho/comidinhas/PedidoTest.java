@@ -3,6 +3,7 @@ package javaquinho.comidinhas;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javaquinho.comidinhas.excecoes.LimiteProdutosException;
 import javaquinho.comidinhas.models.Pedido;
 import javaquinho.comidinhas.models.Produto;
 
@@ -27,8 +28,15 @@ public class PedidoTest {
         produto2.setNome("Produto 2");
 
         pedido = new Pedido();
-        pedido.addProduto(produto1);
-        pedido.addProduto(produto2);
+
+        try {
+            pedido.addProduto(produto1);
+            pedido.addProduto(produto2);
+        }
+        catch (LimiteProdutosException e){
+            System.out.println(e);
+        }
+        
     }
 
     @Test
@@ -46,7 +54,12 @@ public class PedidoTest {
         produto3.setPreco(15.0);
         produto3.setNome("Produto 3");
 
-        pedido.addProduto(produto3);
+        try {
+            pedido.addProduto(produto3);
+        }
+        catch (LimiteProdutosException e){
+            System.out.println(e);
+        }
 
         assertEquals(3, pedido.getProdutos().size());
         assertEquals(15.0, pedido.getProdutos().get(2).getPreco(), 0.001);

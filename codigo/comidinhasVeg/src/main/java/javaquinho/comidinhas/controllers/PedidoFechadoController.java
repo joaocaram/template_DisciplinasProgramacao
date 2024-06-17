@@ -3,6 +3,8 @@ package javaquinho.comidinhas.controllers;
 import java.util.List;
 import java.util.Optional;
 import java.net.URI;
+
+import javaquinho.comidinhas.excecoes.LimiteProdutosException;
 import javaquinho.comidinhas.models.Pedido;
 import javaquinho.comidinhas.models.PedidoFechado;
 import javaquinho.comidinhas.models.Produto;
@@ -25,7 +27,8 @@ public class PedidoFechadoController {
     @Autowired
     private PedidoFechadoRepository repository;
 
-    @Autowired RequisicaoRepository repositoryRequisicao;
+    @Autowired
+    RequisicaoRepository repositoryRequisicao;
 
     // Criar novo pedido
     @PostMapping
@@ -80,10 +83,14 @@ public class PedidoFechadoController {
             return ResponseEntity.notFound().build();
         }
 
-        Requisicao req = repositoryRequisicao.findByPedido(pedido);
-        pedido.addProduto(produto);
-        repository.save(pedido);
+        try {
+            pedido.addProduto(produto);
+            repository.save(pedido);
+            return ResponseEntity.ok().body(pedido);
 
-        return ResponseEntity.ok().body(pedido);
+        } catch (LimiteProdutosException e) {
+            return ResponseEntity.status(500).build();
+        }
+
     }
 }

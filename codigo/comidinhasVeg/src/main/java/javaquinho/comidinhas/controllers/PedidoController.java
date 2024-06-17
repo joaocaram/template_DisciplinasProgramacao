@@ -3,6 +3,8 @@ package javaquinho.comidinhas.controllers;
 import java.util.List;
 import java.util.Optional;
 import java.net.URI;
+
+import javaquinho.comidinhas.excecoes.LimiteProdutosException;
 import javaquinho.comidinhas.models.Pedido;
 import javaquinho.comidinhas.models.Produto;
 import javaquinho.comidinhas.repositories.PedidoRepository;
@@ -74,10 +76,17 @@ public class PedidoController {
             return ResponseEntity.notFound().build();
         }
 
-        Pedido pedido = optionalPedido.get();
-        pedido.addProduto(produto);
-        pedidoRepository.save(pedido);
+        
 
-        return ResponseEntity.ok().body(pedido);
+        Pedido pedido = optionalPedido.get();
+
+        try {
+            pedido.addProduto(produto);
+            pedidoRepository.save(pedido);
+            return ResponseEntity.ok().body(pedido);
+
+        } catch (LimiteProdutosException e) {
+            return ResponseEntity.status(500).build();
+        }
     }
 }

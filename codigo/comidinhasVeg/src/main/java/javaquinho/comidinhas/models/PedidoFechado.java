@@ -21,7 +21,7 @@ public class PedidoFechado extends Pedido {
     @JoinColumn(name = "requisicao", nullable = true)
     private Requisicao requisicao;
 
-    private static int MAXIMO_ITENS_PESSOA = 4;
+    private static int MAXIMO_ITENS_PESSOA = 2;
 
     public int getMaximoItens() {
         return this.requisicao.getQuantPessoas() * MAXIMO_ITENS_PESSOA;
