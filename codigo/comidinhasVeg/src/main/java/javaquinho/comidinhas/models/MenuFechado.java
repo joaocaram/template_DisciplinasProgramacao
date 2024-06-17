@@ -1,7 +1,9 @@
 package javaquinho.comidinhas.models;
 
+import jakarta.persistence.Entity;
 import javaquinho.comidinhas.excecoes.LimiteProdutosException;
 
+@Entity
 public class MenuFechado extends Menu{
     private static int MAXIMO_ITENS = 5;
 
